@@ -1,0 +1,44 @@
+<div class="confirmation">
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center py-3">
+                <h2>{{data.title}}</h2>
+            </div>
+
+            <div class="col-sm-12 text-center d-flex align-items-center flex-column">
+                <div class="col-sm-7 my-3 mb-5">
+                    <div class="d-flex">
+                        <div class="pl-5">
+                            <img src="{{adUserImgUrl}}/{{data.data.pictogram.path}}" alt="">
+                        </div>
+
+                        <div class="mr-5">
+                            <div>
+                                <p>{{ data.data.address }}</p>
+                            </div>
+                            <div *ngIf="data.data.comment" >
+                                <p><strong> A l’attention du livreur</strong></p>
+                               <p> {{ data.data.comment }} </p>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col-sm-12 d-flex justify-content-center align-items-center">
+                <button class="btn-confirm mr-3" (click)="onConfirm()">
+                    {{ (data.confirmBtn) }}
+                </button>
+                <button class="btn-cancel " (click)="onCancel()">
+                    {{ (data.cancelBtn) }}
+                </button>
+            </div>
+
+
+        </div>
+    </div>
+  
+  </div>

@@ -1,0 +1,21 @@
+<button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu" class="lang mr-5">
+    <p class="lang ">FR</p>
+</button>
+<mat-menu #menu="matMenu">
+    <button mat-menu-item>
+        <p>FR</p>
+    </button>
+    <button mat-menu-item disabled>
+        <p>EN</p>
+    </button>
+</mat-menu>
+
+<mat-icon matPrefix class="mr-3 cursor-pointer"><img src="../../assets/img/social_media_picto/perso.svg" />
+</mat-icon>
+
+<mat-icon matPrefix class="cursor-pointer">
+    <a routerLink="/cart"  [queryParams]="{type: type}">
+        <img src="../../assets/img/social_media_picto/panier.svg" />
+        <!-- <span class="mt-2 ">{{totalItems}}</span> -->
+    </a>
+</mat-icon>

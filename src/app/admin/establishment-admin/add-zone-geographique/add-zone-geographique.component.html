@@ -1,0 +1,77 @@
+<div class="zoneGeographique">
+    <mat-dialog-content >
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+   
+                    <form [formGroup]="zoneGeographiqueForm" (ngSubmit)="zoneGeographiqueFormSubmit()">
+                        <div class="row">
+                           <div class="col-12">
+                               <mat-label class="mb-1 d-block">Veuillez entrer le nom géographique:</mat-label>
+                               <mat-form-field appearance="outline" class="mb-3">
+                                   <input matInput  formControlName="geographic_name" name="geographic_name">    
+                               </mat-form-field> 
+                           </div>
+                        </div>
+                
+                        <div class="row">
+                           <div class="col-sm-6">                              
+                                <mat-label class="mb-1 d-block">Quel sera le temps de livraison?</mat-label>
+                                   <div class="row">
+                                       <div class="col-3">
+                                        <mat-form-field appearance="outline" class="">
+                                            <input matInput  formControlName="delivery_time" name="delivery_time">  
+                                        </mat-form-field>
+                                       </div>
+                                       <div class="col-3">
+                                        <mat-form-field appearance="outline" class="">
+                                            <mat-select formControlName="unit">
+                                                <mat-option *ngFor="let timeUnits of timeUnitsList" [value]="timeUnits">
+                                                    {{timeUnits.name}}
+                                                </mat-option>
+                                            </mat-select>
+                                         </mat-form-field>
+                                       </div>
+                                   </div>                                                       
+                           </div>
+                           <div class="col-sm-6">
+                            <mat-label class="mb-1 d-block">Livraison gratuite?</mat-label>
+                             <div class="row">
+                                 <div class="col-3">
+                                    <mat-slide-toggle formControlName="free_delivery"></mat-slide-toggle>
+                                 </div>
+                                 <div class="col-3">
+                                    <mat-form-field appearance="outline" class="mb-4">
+                                        <input matInput  formControlName="shipping_cost" name="shipping_cost">  
+                                    </mat-form-field>
+                                 </div>
+                             </div>
+                            
+                           </div>
+                       </div>
+                       <div class="row">
+                           <div class="col-sm-6">
+                               <mat-label class="mb-1 d-block">Et le montant minimum?</mat-label>
+                               <mat-form-field appearance="outline" class="mb-3">
+                                   <input matInput  formControlName="minimum_per_order" name="minimum_per_order">    
+                               </mat-form-field> 
+                           </div>
+                        </div>
+   
+                        <div class="col-sm-12 d-flex justify-content-center align-items-center">
+                           <button class="btn-confirm mr-3" (click)="onConfirm()">Confirmer</button>
+                           <button class="btn-cancel" (click)="onCancel()"> Annuler </button>
+                       </div>
+   
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </mat-dialog-content>
+
+
+</div>
+
+
+  

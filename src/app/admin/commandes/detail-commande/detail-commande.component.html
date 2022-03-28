@@ -1,0 +1,327 @@
+<ng-container *transloco="let t">
+  <section  class="">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+              <div class="row">
+                <div class="col-sm-5 order_details" >
+
+              
+              
+                  
+
+                   <div class="row">
+                     <div class="col-12">
+                       <div class="line">
+                        <h2>Récapitulatif</h2>
+                       </div>                        
+                     </div>
+
+                     <div class="col-12 ">
+                       <div class="line pr-0 d-flex justify-content-start align-items-start">
+                        <p>Commande à livrer à l'adresse suivante:</p>
+                        <p>{{ orderDetail?.first_name }}  {{ orderDetail?.last_name }}
+                          {{ orderDetail?.address }}
+                        </p>
+                       </div>                                              
+                     </div>
+                  <div class="col-12 ">
+                      <div class="d-flex mt-3 line" *ngFor="let prod of orderDetail?.products">
+                        <div class="content d-flex flex-column pl-3 w-100">
+                          <img src="{{ProdImgUrl}}/{{prod.picture }}" class="img_prod" alt="">
+                        </div>
+                        <div class="content d-flex flex-column  pl-3 w-100">
+                          <p>{{ prod.name }}</p>
+                          <div *ngFor=" let ing of prod.ingredients">
+                            <p> - {{ing.name}}</p>
+    
+                          </div>
+                        </div>
+                        <div class="content d-flex flex-column  pl-3 w-100">
+                          <p>{{ prod.price }} €</p>
+                        </div>
+                       </div>    
+
+                       
+
+                </div>    
+                  <div class="card-body">
+                      <div class="d-flex justify-content-end pt-2">
+                        <p class="text-muted mb-0"><span class="fw-bold me-4">Code promo</span> -{{
+                          orderDetail.promo_code_discount }}€</p>
+                      </div>   
+                      <div class="d-flex justify-content-end pt-2">
+                        <p class="text-muted mb-0"><span class="fw-bold me-4">Total HTVA</span> {{ orderDetail.total_htva }}
+                        </p>
+                      </div>
+                      <div class="d-flex justify-content-end">
+                        <p class="text-muted mb-0"><span class="fw-bold me-4">TVA</span> {{ orderDetail.tva }}</p>
+                      </div>
+                      <div class="d-flex justify-content-end">
+                        <p class="text-muted mb-0"><span class="fw-bold me-4">Total</span> {{ orderDetail.total_to_pay }}
+                        </p>
+                      </div>    
+                  </div>
+
+                </div>
+
+
+                <div [ngClass]="{'loading': orderDetail.status.name == 'CONFIRMED' && orderDetail.order_reception_type == 'DELIVERY' }">
+                  <p *ngIf="orderDetail.status.name == 'CONFIRMED' && orderDetail.order_reception_type == 'DELIVERY'">En attente d’approbation par l’un de nos partenaires livreurs.</p>                                                      
+                </div>
+
+                <div [ngClass]="{'loading':  orderDetail.status.name == 'FINISHED' && orderDetail.order_reception_type == 'DELIVERY' }">
+                  <p *ngIf="orderDetail.status.name == 'FINISHED' && orderDetail.order_reception_type == 'DELIVERY'">Commande cloturée</p>   
+                </div>
+
+
+       </div>
+
+
+    <div class="col-sm-5 ">
+
+        <div class="order_status" *ngIf="orderDetail.order_reception_type == 'TAKEAWAY'" >
+          <div [ngClass]="{
+            'passed': orderDetail.status.name != 'NOT_TREATED',
+            'active': orderDetail.status.name == 'NOT_TREATED'
+             }">
+          <div class="d-flex justify-content-center p-2">
+            <div class="round">
+                <span *ngIf="orderDetail.status.name =='NOT_TREATED'">1</span> 
+                <span *ngIf="orderDetail.status.name != 'NOT_TREATED'"><img src="./../../assets/img/checked.svg" alt=""></span>                  
+            </div>         
+          </div>
+          <div class="d-flex justify-content-center p-2">
+            <button class="btn_status mb-4" (click)="onChangeOrderStatus('confirm')">Confirmer la
+              commande</button>
+          </div>
+          <div class="d-flex justify-content-center">
+            <p>Lorsque vous confirmez la commande, le client reçoit un mail lui informant que la commande est en
+              cours de préparation.</p>
+          </div>
+        </div>
+   
+    <div [ngClass]="{
+          'next': orderDetail.status.name == 'NOT_TREATED',
+           'active': orderDetail.status.name == 'CONFIRMED' ,
+          'passed': orderDetail.status.name == 'IN_DELIVERY' || orderDetail.status.name == 'READY_FOR_PICKUP' || orderDetail.status.name == 'FINISHED'      
+           }" >
+ 
+      <div class="d-flex justify-content-center ">
+       <div class="next_step mb-4"></div>
+      </div>
+   
+    <div class="d-flex justify-content-center ">
+      <div class="round">
+        <span *ngIf="orderDetail.status.name =='CONFIRMED' || orderDetail.status.name == 'NOT_TREATED' ">2</span> 
+        <span *ngIf="orderDetail.status.name == 'IN_DELIVERY' || orderDetail.status.name == 'READY_FOR_PICKUP' || orderDetail.status.name == 'FINISHED' "><img src="./../../assets/img/checked.svg" alt=""></span>   
+      </div>                                 
+    </div>
+
+  <div class="d-flex justify-content-center p-2">
+    <button class="btn_status mb-4" (click)="onChangeOrderStatus('send_notif')">Envoyer notification
+      d’expédition</button>
+  </div>
+  <div class="d-flex justify-content-center">
+    <p *ngIf="orderDetail.order_reception_type== 'TAKEAWAY'">Le client recevra un mail lui informant que sa commande est dans les mains du livreur.</p>
+    <p *ngIf="orderDetail.order_reception_type== 'DELIVERY'">Le client recevra un mail lui informant que sa commande est prete pour l'enlevement.</p>
+  </div>
+</div>
+  <div [ngClass]="{
+       'next':  orderDetail.status.name == 'CONFIRMED' || orderDetail.status.name == 'NOT_TREATED',
+       'active': orderDetail.status.name == 'IN_DELIVERY' || orderDetail.status.name == 'READY_FOR_PICKUP',
+      'passed': orderDetail.status.name == 'FINISHED'
+     }">
+   <div class="d-flex justify-content-center ">
+     <div class="next_step mb-4"></div>
+   </div>
+    <div class="d-flex justify-content-center p-2">
+     <div class="round">
+       <span *ngIf="orderDetail.status.name != 'FINISHED' ">3</span> 
+         <span *ngIf="orderDetail.status.name == 'FINISHED'"><img src="./../../assets/img/checked.svg" alt=""></span>   
+      </div>
+      </div>
+       <div class="d-flex justify-content-center p-2">
+          <button class="btn_status mb-4" (click)="onChangeOrderStatus('close_ordre')">Demander un avis et cloturer la commande</button>
+       </div>
+       <div class="d-flex justify-content-center">
+          <p>Le client recevra un e-mail lui demandant d’écrire un avis sur vous.</p>
+       </div>
+     </div>    
+  </div>
+
+         <!--    OWN_DELIVERY   -->
+         <div class="order_status" *ngIf="orderDetail.order_reception_type == 'DELIVERY' &&  orderDetail.establishment_reception_type.name == 'OWN_DELIVERERS' ">
+          <div [ngClass]="{
+            'passed': orderDetail.status.name != 'NOT_TREATED',
+            'active': orderDetail.status.name == 'NOT_TREATED'
+             }">
+          <div class="d-flex justify-content-center p-2">
+            <div class="round">
+                <span *ngIf="orderDetail.status.name =='NOT_TREATED'">1</span> 
+                <span *ngIf="orderDetail.status.name != 'NOT_TREATED'"><img src="./../../assets/img/checked.svg" alt=""></span>                  
+            </div>         
+          </div>
+          <div class="d-flex justify-content-center p-2">
+            <button class="btn_status mb-4" (click)="onChangeOrderStatus('confirm')">Confirmer la
+              commande</button>
+          </div>
+          <div class="d-flex justify-content-center">
+            <p>Lorsque vous confirmez la commande, le client reçoit un mail lui informant que la commande est en
+              cours de préparation.</p>
+          </div>
+        </div>
+   
+    <div [ngClass]="{
+          'next': orderDetail.status.name == 'NOT_TREATED',
+           'active': orderDetail.status.name == 'CONFIRMED' ,
+          'passed': orderDetail.status.name == 'IN_DELIVERY' || orderDetail.status.name == 'READY_FOR_PICKUP' || orderDetail.status.name == 'FINISHED'      
+           }" >
+ 
+      <div class="d-flex justify-content-center ">
+       <div class="next_step mb-4"></div>
+      </div>
+   
+    <div class="d-flex justify-content-center ">
+      <div class="round">
+        <span *ngIf="orderDetail.status.name =='CONFIRMED' || orderDetail.status.name == 'NOT_TREATED' ">2</span> 
+        <span *ngIf="orderDetail.status.name == 'IN_DELIVERY' || orderDetail.status.name == 'READY_FOR_PICKUP' || orderDetail.status.name == 'FINISHED' "><img src="./../../assets/img/checked.svg" alt=""></span>   
+      </div>                                 
+    </div>
+
+  <div class="d-flex justify-content-center p-2">
+    <button class="btn_status mb-4" (click)="onChangeOrderStatus('send_notif')">Envoyer notification
+      d’expédition</button>
+  </div>
+  <div class="d-flex justify-content-center">
+    <p *ngIf="orderDetail.order_reception_type== 'TAKEAWAY'">Le client recevra un mail lui informant que sa commande est dans les mains du livreur.</p>
+    <p *ngIf="orderDetail.order_reception_type== 'DELIVERY'">Le client recevra un mail lui informant que sa commande est prete pour l'enlevement.</p>
+  </div>
+</div>
+  <div [ngClass]="{
+       'next':  orderDetail.status.name == 'CONFIRMED' || orderDetail.status.name == 'NOT_TREATED',
+       'active': orderDetail.status.name == 'IN_DELIVERY' || orderDetail.status.name == 'READY_FOR_PICKUP',
+      'passed': orderDetail.status.name == 'FINISHED'
+     }">
+   <div class="d-flex justify-content-center ">
+     <div class="next_step mb-4"></div>
+   </div>
+    <div class="d-flex justify-content-center p-2">
+     <div class="round">
+       <span *ngIf="orderDetail.status.name != 'FINISHED' ">3</span> 
+         <span *ngIf="orderDetail.status.name == 'FINISHED'"><img src="./../../assets/img/checked.svg" alt=""></span>   
+      </div>
+      </div>
+       <div class="d-flex justify-content-center p-2">
+          <button class="btn_status mb-4" (click)="onChangeOrderStatus('close_ordre')">Demander un avis et cloturer la commande</button>
+       </div>
+       <div class="d-flex justify-content-center">
+          <p>Le client recevra un e-mail lui demandant d’écrire un avis sur vous.</p>
+       </div>
+     </div>    
+  </div>
+
+    <!--    PARTNER_DELIVERY     -->
+      <div class="order_status_2" *ngIf="orderDetail.order_reception_type == 'DELIVERY' && orderDetail.establishment_reception_type.name == 'PARTNER_DELIVERERS' ">
+       
+        <div [ngClass]="{
+          'passed': orderDetail.status.name != 'NOT_TREATED',
+          'active': orderDetail.status.name == 'NOT_TREATED'
+           }">
+         <div class="d-flex justify-content-center p-2">
+           <div class="round">
+              <span *ngIf="orderDetail.status.name =='NOT_TREATED'">1</span> 
+              <span *ngIf="orderDetail.status.name != 'NOT_TREATED'"><img src="./../../assets/img/checked.svg" alt=""></span>                  
+           </div>         
+         </div>
+         <div class="d-flex justify-content-center p-2">
+           <button class="btn_status" (click)="onChangeOrderStatus('confirm')">Confirmer la
+             commande</button>
+         </div>
+         <div class="d-flex justify-content-center">
+           <p>Lorsque vous confirmez la commande, le client reçoit un mail lui informant que la commande est en
+               cours de préparation.</p>
+         </div>
+       </div>
+       
+      <div [ngClass]="{
+        'next': orderDetail.status.name == 'NOT_TREATED',
+        'active': orderDetail.status.name == 'CONFIRMED' ,
+        'passed': orderDetail.status.name == 'IN_DELIVERY' || orderDetail.status.name == 'READY_FOR_PICKUP' || orderDetail.status.name == 'FINISHED'      
+      }" >
+       
+      <div class="d-flex justify-content-center ">
+        <div class="next_step mb-4"></div>
+      </div>
+        <div class="d-flex justify-content-center ">
+          <div class="round">
+            <span *ngIf="orderDetail.status.name =='CONFIRMED' || orderDetail.status.name == 'NOT_TREATED' ">2</span> 
+            <span *ngIf="orderDetail.status.name == 'IN_DELIVERY' || orderDetail.status.name == 'READY_FOR_PICKUP' || orderDetail.status.name == 'FINISHED' "><img src="./../../assets/img/checked.svg" alt=""></span>   
+          </div>                                 
+        </div>
+        <div class="d-flex justify-content-center">
+          <p>message de confirmation</p>
+        </div>
+      </div>
+
+      <div [ngClass]="{
+           'next': orderDetail.status.name == 'NOT_TREATED',
+           'active': orderDetail.status.name == 'CONFIRMED' ,
+          'passed': orderDetail.status.name == 'IN_DELIVERY' || orderDetail.status.name == 'READY_FOR_PICKUP' || orderDetail.status.name == 'FINISHED'      
+          }" >
+
+        <div class="d-flex justify-content-center ">
+         <div class="next_step mb-4"></div>
+        </div>
+ 
+       <div class="d-flex justify-content-center ">
+       <div class="round">
+         <span *ngIf="orderDetail.status.name =='CONFIRMED' || orderDetail.status.name == 'NOT_TREATED' ">3</span> 
+         <span *ngIf="orderDetail.status.name == 'IN_DELIVERY' || orderDetail.status.name == 'READY_FOR_PICKUP' || orderDetail.status.name == 'FINISHED' "><img src="./../../assets/img/checked.svg" alt=""></span>   
+       </div>                                 
+      </div>
+
+      <div class="d-flex justify-content-center p-2">
+        <button class="btn_status" (click)="onChangeOrderStatus('send_notif')">Commande remise au livreur</button>   
+      </div>
+
+        <div class="d-flex justify-content-center">
+        <p *ngIf="orderDetail.order_reception_type== 'TAKEAWAY'">Le client recevra un mail lui informant que sa commande est dans les mains du livreur.</p>
+        <p *ngIf="orderDetail.order_reception_type== 'DELIVERY'">Le client recevra un mail lui informant que sa commande est prete pour l'enlevement.</p>
+        </div>
+    </div>
+
+      <div [ngClass]="{
+        'next':  orderDetail.status.name == 'CONFIRMED' || orderDetail.status.name == 'NOT_TREATED',
+        'active': orderDetail.status.name == 'IN_DELIVERY' || orderDetail.status.name == 'READY_FOR_PICKUP',
+        'passed': orderDetail.status.name == 'FINISHED'
+      }">
+      <div class="d-flex justify-content-center ">
+        <div class="next_step"></div>
+      </div>
+      <div class="d-flex justify-content-center p-2">
+        <div class="round">
+          <span *ngIf="orderDetail.status.name != 'FINISHED' ">4</span> 
+          <span *ngIf="orderDetail.status.name == 'FINISHED'"><img src="./../../assets/img/checked.svg" alt=""></span>   
+        </div>
+      </div>
+      <div class="d-flex justify-content-center">
+        <p>Commande livrée</p>
+      </div>
+      </div>
+    </div>
+
+      
+
+
+
+   </div>
+
+    </div>  
+  </div>
+      
+            
+    </div>
+  </div>
+</section>
+</ng-container>

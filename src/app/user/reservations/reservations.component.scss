@@ -1,0 +1,128 @@
+
+.order-image{
+    width: 400px;
+    height: 148.74px;
+    margin: auto;
+}
+
+.admin_header{
+    h2{
+        margin-bottom: 0;
+        font-weight: 500!important;
+        font-size: 18px;
+    }
+    a{
+        font-weight: 600;
+    }
+}
+ 
+
+.pageContent{
+    padding: 20px;
+    margin-left: 80px !important;
+    height: 100vh;
+    overflow: auto !important;
+    &.expanded{
+        margin-left: 245px !important;
+    }
+}
+
+
+.reservation-panel{
+    height:calc(100vh - 120px);
+    p{
+        margin-bottom: 0;
+    }
+    h4{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 16px;
+        font-weight: 500;
+        color: var(--secondary_color);
+        text-transform: unset;
+    }
+    h5{
+        margin-bottom: 0px;
+        font-size: 18px;
+        font-weight: 500;
+        color: var(--secondary_color);
+        span{
+            color: #699F00;
+            font-size: 13px;
+            &.negative{
+                color: #E10000
+            }
+        }
+    }
+
+
+    .reservations{
+        // height: 100%;
+         //max-height: 70%;
+       //  width: 50%;
+         padding-left: 10px;
+         padding-top: 20px;
+         padding: 27px 30px;
+       
+         > div{
+             border-radius: 27px;
+             box-shadow: 4px 9px 65px #D3E1E8;
+             background-color: #FFF;
+             //padding: 27px 30px;
+             height: 100%;
+             max-height: 100%;
+             h2{
+                 margin-bottom: 0;
+                 font-weight: 500!important;
+                 font-size: 18px;
+                 padding: 27px 30px;
+             }
+             .reservations_list{
+                 //height: calc( 70vh - 178px );
+                 height: calc( 90vh - 180px );
+                // min-height: calc(100vh - 234px);
+              //   max-height: calc(100vh - 234px);
+                 overflow-y: auto;
+               
+             } 
+         }   
+     }
+
+
+    .restaurants{
+        // height: 100%;
+         //max-height: 70%;
+       //  width: 50%;
+         padding-left: 10px;
+         padding-top: 20px;
+         padding: 27px 30px;
+       
+         > div{
+             border-radius: 27px;
+             box-shadow: 4px 9px 65px #D3E1E8;
+             background-color: #FFF;
+             padding: 27px 30px;
+             height: 100%;
+             max-height: 100%;
+   
+         }
+     
+     }
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+}
+ ::-webkit-scrollbar-track {
+    background-color: var(--primary_color);
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+}
+
+ ::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: var(--secondary_color);
+}
+

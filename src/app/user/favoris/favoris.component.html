@@ -1,0 +1,33 @@
+
+<ng-container *transloco="let t">
+    <section >
+        <div class="container-fluid">
+              
+          <div class="row">
+            <div class="col-12">
+              <div class="row white-background-color border-raduis-15 py-4">
+  
+                <div class="col-3" *ngFor="let restaurant of favorisList; let i = index ">
+                  <app-restaurant [restaurant]="restaurant"></app-restaurant>
+                </div>
+               
+
+              </div>
+
+              <div class="row col-9 justify-content-center" *ngIf="favorisList== 0" >
+                <div class="col-11 col-sm-5 text-center p-5" >
+                    <img src="../../assets/img/favoris_not_found.svg" alt="" class="img-fluid">
+                    <p class="pt-4 mb-4"> Vous n’avez pas encore de restaurants favoris...</p>
+                </div>
+            </div> 
+
+            </div>
+ 
+       
+          </div>
+
+    
+        
+        </div>
+    </section>
+</ng-container>

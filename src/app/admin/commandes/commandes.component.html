@@ -1,0 +1,197 @@
+<ng-container *transloco="let t">
+    <section class="">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            <div class="row white-background-color border-raduis-15 py-4">
+              <div class="col-12">
+                <div class="row">
+                    <div class="px-3 d-flex justify-content-start">
+                        <ul class="list-inline filter">
+                          <li>
+                            <a>
+                                <svg width="23" height="22" viewBox="0 0 23 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M16.1 20.35C16.1 19.4387 15.3277 18.7 14.375 18.7H8.625C7.67231 18.7 6.9 19.4387 6.9 20.35C6.9 21.2613 7.67231 22 8.625 22H14.375C15.3277 22 16.1 21.2613 16.1 20.35Z" fill="#58C6FA"/>
+                                    <path d="M19.55 12.1C19.55 10.885 18.5203 9.9 17.25 9.9H5.75C4.47974 9.9 3.45 10.885 3.45 12.1C3.45 13.315 4.47974 14.3 5.75 14.3H17.25C18.5203 14.3 19.55 13.315 19.55 12.1Z" fill="#58C6FA"/>
+                                    <path d="M0 2.75C0 4.26878 1.28718 5.5 2.875 5.5H20.125C21.7128 5.5 23 4.26878 23 2.75C23 1.23122 21.7128 0 20.125 0H2.875C1.28718 0 0 1.23122 0 2.75Z" fill="#58C6FA"/>
+                                </svg>                               
+                            </a>
+                            <div class="options">
+                                <div class="options_content">
+                                  <h4>{{ t('ORDER') }}</h4>
+                                  <div class="pt-3 px-3">
+                                    <mat-radio-group [formControl]="order">
+                                      <mat-radio-button value="ALPHABETICAL"> ALPHABETICAL </mat-radio-button>
+                                      <mat-radio-button value="CHRONOLOGICAL"> CHRONOLOGICAL</mat-radio-button>                                     
+                                    </mat-radio-group>        
+                                  </div>
+                                  <h4>{{ t('DEL/TAKE_AWAY') }}</h4>
+                                  <div class="pt-3 px-3">
+                                    <mat-checkbox [formControl]="DELIVERY"> {{t('DELIVERY')}} </mat-checkbox>
+                                    <mat-checkbox [formControl]="TAKEAWAY"> {{t('TAKEAWAY')}} </mat-checkbox>                                    
+                                  </div>
+                                  <h4>{{ t('STATUS') }}</h4>
+                                  <div class="pt-3 px-3" >
+                                      <mat-checkbox *ngFor="let status of orderStatusList.data"  [formControl]="selectedStatus" value="status.id">
+                                        {{ t(status.name) }}</mat-checkbox>                                                                                 
+                                  </div>
+                                </div>
+                              </div>
+                          </li>
+                        </ul>
+                      </div>
+                  <div class="">
+                    <mat-form-field appearance="outline" class="search_input">
+                      <mat-icon class="color-secondary" matPrefix>search</mat-icon>
+                      <input matInput class="w-100" [formControl]="search">
+                    </mat-form-field>
+                  </div>
+             
+                </div>
+              </div>
+              <div class="col-12 px-0">
+                    
+                <table mat-table [dataSource]="ordersDataSource" class="w-100" >
+                 
+                  <ng-container matColumnDef="select">
+                    <th mat-header-cell *matHeaderCellDef>
+                      <mat-checkbox >
+                      </mat-checkbox>
+                    </th>
+                    <td mat-cell *matCellDef="let row">
+                      <mat-checkbox >
+                      </mat-checkbox>
+                    </td>         
+                  </ng-container>
+
+                  <ng-container matColumnDef="name">
+                    <th mat-header-cell *matHeaderCellDef> {{ t('NAME_AND_REFERENCE') }} </th>
+                    <td mat-cell *matCellDef="let element"> {{element.establishment_name}}  
+                      <br /> {{element.reference}}
+                    </td>                  
+                  </ng-container>
+
+                  <ng-container matColumnDef="address">
+                    <th mat-header-cell *matHeaderCellDef> {{ t('ADDRESS') }} </th>
+                    <td mat-cell *matCellDef="let element"> {{element.address}}</td>
+                  </ng-container>
+  
+                  <ng-container matColumnDef="montant">
+                    <th mat-header-cell *matHeaderCellDef> {{ t('MONTANT') }} </th>
+                    <td mat-cell *matCellDef="let element"> {{element.total_to_pay}} </td>
+                  </ng-container>  
+  
+                  <ng-container matColumnDef="paiement">
+                    <th mat-header-cell *matHeaderCellDef> {{ t('PAIEMENT') }} </th>
+                    <td mat-cell *matCellDef="let element"> {{element.payment_method.name }} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="reception_type">
+                    <th mat-header-cell *matHeaderCellDef> {{ t('DEL/TAKE_AWAY') }} </th>
+                    <td mat-cell *matCellDef="let element"> {{ t(element.reception_type_name) }} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="statut">
+                    <th mat-header-cell *matHeaderCellDef> {{ t('STATUS') }} </th>                
+                    <td mat-cell *matCellDef="let element">
+                      <span class="badge {{ element.status.name }}">
+                      <ng-container *ngIf="element.status.name == 	'NOT_TREATED' " >{{ t('NOT_TREATED') }} </ng-container>
+                      <ng-container *ngIf="element.status.name ==  'FINISHED' " > {{ t('FINISHED') }} </ng-container>
+                      <ng-container *ngIf="element.status.name ==  'IN_DELIVERY' " > {{ t('IN_DELIVERY') }} </ng-container>
+                      <ng-container *ngIf="element.status.name ==  'CONFIRMED' " > {{ t('CONFIRMED') }} </ng-container>
+                      <ng-container *ngIf="element.status.name ==  'READY_FOR_PICKUP' " > {{ t('READY_FOR_PICKUP') }} </ng-container>
+                      </span>
+                    </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="update">
+                    <th mat-header-cell *matHeaderCellDef></th>
+                    <td mat-cell *matCellDef="let element">
+                      <a>
+                        <svg width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M20.7957 1.60252C19.9116 0.752285 18.4707 0.752285 17.5866 1.60252L17.1216 2.04171L21.2147 5.97193L21.5994 5.6003C22.0471 5.17237 22.294 4.60367 22.294 3.98993C22.294 3.37618 22.0472 2.80749 21.6051 2.37955L20.7957 1.60252Z" fill="#7D90B2"/>
+                          <path d="M15.0664 4.00493L19.1596 7.93513L20.3938 6.75832L16.3007 2.82812L15.0664 4.00493Z" fill="#7D90B2"/>
+                          <path d="M2.2934 16.2328L0.353027 22.038L6.39804 20.1461L18.3388 8.72709L14.2457 4.79688L2.2934 16.2328Z" fill="#7D90B2"/>
+                          </svg>                          
+                      </a>                  
+                    </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="delete">
+                    <th mat-header-cell *matHeaderCellDef></th>
+                    <td mat-cell *matCellDef="let element">
+                      <a (click)="delete(element, index)">
+                        <svg width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M19.6055 2.51748H14.9122V2.47311C14.9122 1.63026 14.2082 0.964844 13.3165 0.964844H10.1251C9.23335 0.964844 8.52936 1.63026 8.52936 2.47311V2.51748H3.83606C3.34327 2.51748 2.94434 2.89454 2.94434 3.36033V4.20319C2.94434 4.66898 3.34327 5.04605 3.83606 5.04605H19.6055C20.0983 5.04605 20.4973 4.66898 20.4973 4.20319V3.36033C20.4973 2.89454 20.0983 2.51748 19.6055 2.51748Z" fill="#7D90B2"/>
+                          <path d="M18.4322 6.19922H5.00934C4.75121 6.19922 4.56347 6.39884 4.58694 6.64283L5.244 19.4853C5.3144 20.9049 6.55813 22.0361 8.05998 22.0361H15.3581C16.8599 22.0361 18.1036 20.927 18.174 19.4853L18.8311 6.64283C18.878 6.42102 18.6668 6.19922 18.4322 6.19922ZM10.2658 18.5981C10.2658 18.9973 9.9373 19.3079 9.5149 19.3079C9.0925 19.3079 8.76398 18.9973 8.76398 18.5981V9.65937C8.76398 9.26012 9.0925 8.94959 9.5149 8.94959C9.9373 8.94959 10.2658 9.26012 10.2658 9.65937V18.5981ZM14.6775 18.5981C14.6775 18.9973 14.349 19.3079 13.9266 19.3079C13.5042 19.3079 13.1757 18.9973 13.1757 18.5981V9.65937C13.1757 9.26012 13.5042 8.94959 13.9266 8.94959C14.349 8.94959 14.6775 9.26012 14.6775 9.65937V18.5981Z" fill="#7D90B2"/>
+                          </svg>                                                  
+                      </a>                  
+                    </td>
+                  </ng-container>
+                  <ng-container matColumnDef="action">
+                    <th mat-header-cell *matHeaderCellDef></th>
+                    <td mat-cell *matCellDef="let element; let i = index">
+                      <a [matMenuTriggerFor]="menu"><svg width="32" height="32" viewBox="0 0 32 32" fill="none"
+                          xmlns="http://www.w3.org/2000/svg">
+                          <path
+                            d="M8 18C9.10457 18 10 17.1046 10 16C10 14.8954 9.10457 14 8 14C6.89543 14 6 14.8954 6 16C6 17.1046 6.89543 18 8 18Z"
+                            fill="#113B3A" />
+                          <path
+                            d="M16 18C17.1046 18 18 17.1046 18 16C18 14.8954 17.1046 14 16 14C14.8954 14 14 14.8954 14 16C14 17.1046 14.8954 18 16 18Z"
+                            fill="#113B3A" />
+                          <path
+                            d="M24 18C25.1046 18 26 17.1046 26 16C26 14.8954 25.1046 14 24 14C22.8954 14 22 14.8954 22 16C22 17.1046 22.8954 18 24 18Z"
+                            fill="#113B3A" />
+                        </svg>
+                      </a>
+                      <mat-menu #menu="matMenu" class="action-menu">
+                        <button mat-menu-item routerLink="/admin/orders/{{element.id}}" class="primary-color" > {{ t('SEE_ORDER') }} </button><hr>
+                        <button mat-menu-item  class="color-red" > {{ t('CANCEL_THE_ORDER') }} </button>
+                      </mat-menu>
+                    </td>
+                  </ng-container>
+              
+                  
+                  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                  <tr mat-row *matRowDef="let row; columns: displayedColumns; let element" [ngClass]="{'new' : !element.seen}"></tr>
+
+                </table> 
+
+           
+                  <div class="col-12">
+                      <div class="d-flex justify-content-end m-0">
+                          <ul class="d-flex w-auto">
+                              <li class="page-item page-item-li btn"
+                                  [ngClass]="{'disabled': currentPage == 1}"
+                                  (click)="currentPage > 1 ? navigateTo(currentPage-1) : null">
+                                  <span aria-hidden="true"><img
+                                          src="../../assets/img/previous.svg" /></span>
+                              </li>
+                              <li class="page-item-li d-flex align-items-center btn "
+                                  [ngClass]="{'page_item_active': item==currentPage, 'dots': item=='...' }"
+                                  (click)=" item!='...' ? navigateTo(item) : null"
+                                  *ngFor="let item of getCollection(lastPage)">
+                                  {{item}}
+                              </li>
+                              <li class="page-item page-item-li btn  ml-2"
+                                  [ngClass]="{'disabled': currentPage == lastPage}"
+                                  (click)="currentPage!=lastPage ? navigateTo(currentPage+1) : null">
+                                  <span aria-hidden="true"><img src="../../assets/img/next.svg " /></span>
+                              </li>
+                          </ul>
+                      </div>
+                  </div>
+           
+                       
+              </div>
+    
+            </div>
+
+            
+
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </ng-container>

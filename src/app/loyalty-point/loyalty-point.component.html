@@ -1,0 +1,30 @@
+<section class="p-0">
+    <div class="container-fluid">
+        <div class="row p-0">
+            <div class="col-12   loyaltyPoint">
+                <div mat-dialog-actions class="d-flex justify-content-end p-2" *ngIf="false">
+                            <div mat-dialog-close>
+                                <img src="../../assets/img/close-w.png" />
+                            </div>  
+                        </div>
+                    <div class=" row bgLoyaltyPoint background-center-cover mb-0">
+                        <!-- <div class="d-flex w-100" style="background-image: url(../../assets/img/loyaltyPoint2.png);"> -->
+                            <div class="col-6 d-flex align-items-start justify-content-center flex-column pl-5">
+                                <h4>Combien de vos points <br> souhaitez-vous utiliser?</h4>
+                                <span>Balance: {{ loyalty_points?.loyalty_points }} points</span>
+                                <p class="mb-4">1 point = 0,25€</p>
+                                <form [formGroup]="pointForm" class="nbLoyaltyPoint">
+                                    <mat-form-field appearance="outline">
+                                        <input matInput formControlName="nbLoyaltyPoint"
+                                            placeholder="Entrez un nombre"  >
+                                    </mat-form-field>
+                                </form>
+                                <button class="btn use" (click)="setLoyaltyPoints()">utiliser</button>
+                            </div> 
+                        <!-- </div> -->
+                    </div>
+                    
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,128 @@
+<ng-container *transloco="let t">
+  <section>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <div class="row">
+            <div class="col-sm-5 order_details">
+              <div class="row">
+                <div class="col-12">
+                  <div class="line">
+                   <h2>Récapitulatif</h2>
+                  </div>                        
+                </div>
+                <div class="col-12 ">
+                  <div class="line pr-0 d-flex justify-content-start align-items-start">
+                   <p>Commande à livrer à l'adresse suivante:</p>
+                   <p>{{ courseDetail?.first_name }}  {{ courseDetail?.last_name }}
+                     {{ courseDetail?.delivery_address }}
+                   </p>
+                  </div>                                              
+                </div>
+                <div class="col-12 ">
+                  <div class="d-flex mt-3 line" *ngFor="let cor of courseDetail?.products">
+                    <div class="content d-flex flex-column pl-3 w-100">
+                      <img src="{{ProdImgUrl}}/{{cor.picture }}" class="img_prod" alt="">
+                    </div>
+                    <div class="content d-flex flex-column  pl-3 w-100">
+                      <p>{{ cor.name }}</p>
+                      <div *ngFor=" let ing of cor.ingredients">
+                        <p> - {{ing.name}}</p>
+
+                      </div>
+                    </div>
+                    <div class="content d-flex flex-column  pl-3 w-100">
+                      <p>{{ cor.price }} €</p>
+                    </div>
+                   </div>    
+              </div> 
+              <div class="card-body">
+                <div class="d-flex justify-content-end pt-2">
+                  <p class="text-muted mb-0"><span class="fw-bold me-4">Code promo</span> -{{
+                    courseDetail?.promo_code_discount }}€</p>
+                </div>   
+                <div class="d-flex justify-content-end pt-2">
+                  <p class="text-muted mb-0"><span class="fw-bold me-4">Total HTVA</span> {{ courseDetail?.total_htva }}
+                  </p>
+                </div>
+                <div class="d-flex justify-content-end">
+                  <p class="text-muted mb-0"><span class="fw-bold me-4">TVA</span> {{ courseDetail?.tva }}</p>
+                </div>
+                <div class="d-flex justify-content-end">
+                  <p class="text-muted mb-0"><span class="fw-bold me-4">Total</span> {{ courseDetail?.total_to_pay }}
+                  </p>
+                </div>    
+             </div>
+            </div>
+         </div>
+
+
+     <div class="col-md-5 order_status">
+
+        <div [ngClass]="{
+            'next': courseDetail.status.name == 'NOT_TREATED',
+            'active': courseDetail.status.name == 'CONFIRMED' ,
+            'passed': courseDetail.status.name == 'IN_DELIVERY' || courseDetail.status.name == 'READY_FOR_PICKUP' || courseDetail.status.name == 'FINISHED'      
+          }">
+
+            <div class="d-flex justify-content-center p-2">
+              <div class="round">
+                <span *ngIf="courseDetail.status.name =='NOT_TREATED'">2</span> 
+                <span *ngIf="courseDetail.status.name != 'NOT_TREATED'"><img src="./../../assets/img/checked.svg" alt=""></span>
+                                 
+              </div>
+
+              
+            </div>
+            <div class="d-flex justify-content-center p-2">
+              <button class="btn_status w-100 mb-4" (click)="onChangeCourseStatus('send_notification')">J’ai envoyé mon livreur!</button>
+            </div>
+            <div>
+              <p>Les grillades chez Nikos va être prévenu que votre livreur arrive.</p>
+            </div>
+
+          </div>
+             
+          <div [ngClass]="{
+            'next':  courseDetail.status.name == 'CONFIRMED' || courseDetail.status.name == 'NOT_TREATED',
+            'active': courseDetail.status.name == 'DELIVERY_MAN_SENT',
+            'passed': courseDetail.status.name == 'IN_DELIVERY' || courseDetail.status.name == 'FINISHED'
+          }">
+
+            <div class="d-flex justify-content-center ">
+              <div class="next_step mb-4"></div>
+            </div>                       
+              <div class="d-flex justify-content-center ">
+                <div class="round">
+                  <span *ngIf="courseDetail.status.name != 'IN_DELIVERY' ">3</span> 
+                  <span *ngIf="courseDetail.status.name == 'IN_DELIVERY' || courseDetail.status.name == 'FINISHED'"><img src="./../../assets/img/checked.svg" alt=""></span>     
+                </div>                                 
+              </div>
+              <div class="d-flex justify-content-center p-2">
+                <button class="btn_status w-100 mb-4" (click)="onChangeCourseStatus('close_course')">Commande livrée</button>
+              </div>
+              <div>
+                <p>Les grillades chez Nikos va être prévenu que la commande est livrée.</p>
+              </div>
+          </div>
+        </div>
+
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+  </section>
+
+  
+
+
+
+
+</ng-container>
+

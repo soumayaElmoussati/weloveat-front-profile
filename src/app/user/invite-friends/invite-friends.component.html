@@ -1,0 +1,46 @@
+
+<ng-container *transloco="let t">
+    <section>
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            <div class="row invitation">
+
+                  <div class="col-7">          
+                    <div class="content py-5 ">
+                        <h3> <strong>Parrainer un ami, comment ça marche?</strong>   </h3>
+                        <p>
+                         Rien de plus simple! Il suffit de remplir le formulaire ci-dessous et inviter votre ami à rejoindre weloveat en cliquant sur le lien figurant dans le mail qu’il va recevoir. 
+                         Dés que votre ami aura passé sa première commande, BOUM vous serez récompensé de 20 points de fidélité (valeur de 5€) par la plateforme.
+                         C’est cadeau, c’est pour nous. ❤
+                        </p>
+    
+                        <h3> <strong>Et si je parraine un commerçant?</strong> </h3>               
+                        <p>
+                            On multiplie par dix la récompense, vous recevez 200 points de fidélité (valeur de 50€). Et oui, c’est du sérieux! 👊💥
+                        </p>
+                   
+                       <form [formGroup]="inviteForm" (ngSubmit)="inviteFormSubmit()" class="py-5">
+                             <label class="custom_label">Adresse email</label>
+                                <mat-form-field appearance="outline" class="mb-3">
+                                 <input matInput formControlName="email" name="email" placeholder="Email">
+                               </mat-form-field>   
+                            <button class="btn-submit px-5 center" type="submit"> Parrainer! </button>
+                       </form>
+                   </div>
+               
+
+                </div>
+                
+                <div class="col-5 img-invitation"></div>
+                
+
+            </div>
+          </div>
+      
+
+
+        </div>
+      </div>
+    </section>
+  </ng-container>

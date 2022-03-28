@@ -1,0 +1,169 @@
+<section>
+    <div class="container-fluid h-100">
+        <div class="row col-12 h-100">
+            <div class="section1 col-3">
+                <img src="../../assets/img/social_media_picto/logo.svg" class="d-block m-auto pt-4 " />
+                <h2 class="p-4 text-center" *ngIf="restaurantList">{{ restaurantList.length }} restaurant(s) trouvé(s)
+                </h2>
+                <ng-container *ngIf="type=='reservation';else notReserv">
+                    <mat-accordion>
+                        <mat-expansion-panel>
+                            <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                    <mat-list>
+                                        Trier par
+                                    </mat-list>
+                                </mat-panel-title>
+                            </mat-expansion-panel-header>
+                            <mat-radio-group [(ngModel)]="triReservation" (ngModelChange)="getRestaurants()">
+                                <mat-radio-button class="example-radio-button d-block"
+                                    *ngFor="let tri of triReservations" [value]="tri">
+                                    {{tri.name}}
+                                </mat-radio-button>
+                            </mat-radio-group>
+                        </mat-expansion-panel>
+                    </mat-accordion>
+                    <mat-accordion>
+                        <mat-expansion-panel>
+                            <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                    Atouts
+                                </mat-panel-title>
+                                <mat-panel-description>
+                                </mat-panel-description>
+                            </mat-expansion-panel-header>
+                            <mat-radio-group>
+                                <mat-checkbox class="d-table" [value]="restauAv"
+                                    *ngFor="let restauAv of restaurantAdvantagesList"
+                                    (click)="onRestauReservation(restauAv)">
+                                    {{restauAv.name}}
+                                </mat-checkbox>
+                            </mat-radio-group>
+                        </mat-expansion-panel>
+                    </mat-accordion>
+                </ng-container>
+                <ng-template #notReserv>
+                    <mat-accordion>
+                        <mat-expansion-panel>
+                            <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                    <mat-list>
+                                        Trier par
+                                    </mat-list>
+                                </mat-panel-title>
+                            </mat-expansion-panel-header>
+                            <mat-radio-group [(ngModel)]="triFood" (ngModelChange)="getRestaurants()">
+                                <mat-radio-button class="example-radio-button d-block" *ngFor="let tri of triFoods"
+                                    [value]="tri">
+                                    {{tri.name}}
+                                </mat-radio-button>
+                            </mat-radio-group>
+                        </mat-expansion-panel>
+                    </mat-accordion>
+                    <mat-accordion>
+                        <mat-expansion-panel>
+                            <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                    Montant minimum par commande
+                                </mat-panel-title>
+                                <mat-panel-description>
+                                </mat-panel-description>
+                            </mat-expansion-panel-header>
+                            <mat-radio-group [formControl]="orderFood">
+                                <mat-radio-button class="example-radio-button d-block" *ngFor="let order of orderFoods"
+                                    [value]="order.value">
+                                    {{order.name}}
+                                </mat-radio-button>
+                            </mat-radio-group>
+                        </mat-expansion-panel>
+                    </mat-accordion>
+                </ng-template>
+                <mat-accordion>
+                    <mat-expansion-panel>
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                Evaluation
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <ngb-rating class="rates py-3" [formControl]="score" [max]=5></ngb-rating>
+                    </mat-expansion-panel>
+                </mat-accordion>
+                <mat-accordion>
+                    <mat-expansion-panel>
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                Diététique
+                            </mat-panel-title>
+                            <mat-panel-description>
+                            </mat-panel-description>
+                        </mat-expansion-panel-header>
+                        <ul class="list-inline dietetic_list ">
+                            <li class="list-inline-item m-2" [ngClass]="{'active': isSelected(dietetics) }"
+                                *ngFor="let dietetics of dieteticsList" (click)="onDieteticClick(dietetics)">
+                                <p>{{ dietetics.name }}</p>
+                            </li>
+                        </ul>
+                    </mat-expansion-panel>
+                </mat-accordion>
+
+
+            </div>
+            <!-- /////////////////////////////////////////////////////////////////////////////////////////////////// -->
+            <div class="col-9">
+                <app-search [receptions]="receptions" (myEvent)="onReceptionTypeChange($event)">
+                </app-search>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="category_list">
+                            <ul class="list-inline category_list">
+                                <li class="list-inline-item text-center " *ngFor="let category of categoriesList">
+                                    <a (click)="onRestauCategoryChange(category) "
+                                        [ngClass]="{'active': restauCategory==category }">
+                                        <img *ngIf=" category.picture" src="{{catRestauImgUrl}}{{category.picture }}">
+                                        <h4 class="pt-1">{{ category.name }}</h4>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="row">
+                            <div class="col-4" *ngFor="let restaurant of restaurantList; let i = index ">
+                                <app-restaurant [restaurant]="restaurant" [queryParams]="{type: type}"></app-restaurant>
+                            </div>
+                            <div class="col-12" *ngIf="restaurantList==0">
+                                <app-page-not-found></app-page-not-found>
+                            </div>
+                            <ng-container *ngIf="perPage > 12">
+                                <div class="col-12 px-3 py-3">
+                                    <div class="d-flex justify-content-end m-0">
+                                        <ul class="d-flex w-auto">
+                                            <li class="page-item page-item-li btn"
+                                                [ngClass]="{'disabled': currentPage == 1}"
+                                                (click)="currentPage > 1 ? navigateTo(currentPage-1) : null">
+                                                <span aria-hidden="true"><img
+                                                        src="../../assets/img/previous.svg" /></span>
+                                            </li>
+                                            <li class="page-item-li d-flex align-items-center btn "
+                                                [ngClass]="{'page_item_active': item==currentPage, 'dots': item=='...' }"
+                                                (click)=" item!='...' ? navigateTo(item) : null"
+                                                *ngFor="let item of getCollection(lastPage)">
+                                                {{item}}
+                                            </li>
+                                            <li class="page-item page-item-li btn  ml-2"
+                                                [ngClass]="{'disabled': currentPage == lastPage}"
+                                                (click)="currentPage!=lastPage ? navigateTo(currentPage+1) : null">
+                                                <span aria-hidden="true"><img src="../../assets/img/next.svg " /></span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </ng-container>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<app-footer></app-footer>

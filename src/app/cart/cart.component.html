@@ -1,0 +1,213 @@
+<section class="mb-4">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 px-4">
+                <div class="row">
+                    <div class="col-2">
+                        <img src="../../assets/img/social_media_picto/logo.svg" class="logoApp my-2" />
+                    </div>
+                    <div class="col-10">
+                        <app-search [receptions]="receptions" [receptionType]="receptionType">
+                        </app-search>
+                    </div>
+                </div>
+                <app-restaurant-details-header [restaurant]="cart.restaurant">
+                </app-restaurant-details-header>
+            </div>
+        </div>
+    </div>
+</section>
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <!-- <app-search [receptions]="receptions">
+                </app-search> -->
+                <table>
+                    <thead>
+                        <tr class="bordTable">
+                            <th>Produit</th>
+                            <th scope=" col">annexe</th>
+                            <th>Quantité</th>
+                            <th>Prix/pc</th>
+                            <th>Prix total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="py-3" *ngFor="let item of cart.items; let i = index">
+                            <td class="prodW">
+                                <ul class="list-inline">
+                                    <li class="list-item">
+                                        <h3>{{ item.product.name }} </h3>
+                                    </li>
+                                    <li class="list-item">
+                                        <div class="background-center-cover"
+                                            style="background-image: url({{ProdImgUrl}}{{item.product.picture}})">
+                                        </div>
+                                    </li>
+                                </ul>
+                            </td>
+                            <td valign="top">
+                                <ng-container *ngFor="let annexe of item.annexe">
+                                    <ng-container *ngFor="let value of annexe.value">
+                                        <h3>
+                                            <li>
+                                                <ng-container *ngIf="annexe.name=='custom'">Sans </ng-container>
+                                                {{value.name}}
+                                            </li>
+                                        </h3>
+                                    </ng-container>
+                                </ng-container>
+                            </td>
+                            <td valign="top" class="pt-4">
+                                <div class="d-flex quantity  " valign="top">
+                                    <a (click)="decrementQte(i)" class="btnAdd">
+                                        <span>-</span>
+                                    </a>
+                                    <h3 class="px-1">{{ item.quantity | number }}</h3>
+                                    <a (click)="incrementQte(i)" class="btnAdd">
+                                        <span>+</span>
+                                    </a>
+                                </div>
+                            </td>
+                            <td class="price pt-4" valign="top">
+                                <h3>{{ item.price | number : '2.2-2'}} €</h3>
+                            </td>
+                            <td class="totalPrice pt-4" valign="top">
+                                <h3>{{ item.price * item.quantity | number : '2.2-2' }} €</h3>
+                            </td>
+                            <td valign="top" class="pt-4"> <a (click)="deleteItem(i)">
+                                    <p> X</p>
+                                </a> </td>
+                            <br>
+                        </tr>
+                        <!-- <p>Prix total:{{totalPrice(i)}}</p> -->
+                    </tbody>
+
+                </table>
+                <div class="row">
+                    <div class="col-6">
+                        <ng-container *ngIf="isConnected">
+                            <div class="py-3 px-3">
+                                <div class="loyaltyPoint">
+                                    <img src="../../../../assets/img/loyaltyPoint.png" class="loyaltyPointImg">
+                                    <h4>Vous avez ...</h4>
+                                    <span>{{ loyalty_points }}</span>
+                                    <p>points de <br> fidélité</p>
+                                    <button mat-button (click)="openloyatlyPoint()" class="btn use">utiliser</button>
+                                </div>
+                                <!-- <app-user-loyalty-point></app-user-loyalty-point> -->
+                            </div>
+                        </ng-container>
+
+                    </div>
+                    <div class="col-6">
+                        <div class="result d-flex justify-content-end align-items-end flex-column">
+                            <h3>Frais de livraison: {{cart.restaurant.shipping_cost}} €</h3>
+                            <h3>Total: {{totalPrice()}} €</h3>
+                            <div *ngIf="cart.coupon">
+                                <h3 class="pb-2" *ngIf="cart.coupon.percentage">Promo “{{cart.coupon.promo_code}}”:
+                                    {{totalPrice()*cart.coupon.percentage/100}} €</h3>
+                            </div>
+                            <div *ngIf="cart.coupon">
+                                <h3 class="pb-2" *ngIf="cart.coupon.discount">Promo “{{cart.coupon.promo_code}}”:
+                                    {{cart.coupon.discount}} €</h3>
+                            </div>
+                            <ng-container *ngIf="isConnected">
+                                <h3 class="pb-2" *ngIf="cart.loyalty_points">fidélité: -{{cart.loyalty_points * 0.25}} €
+                                </h3>
+                            </ng-container>
+                            <span class="pt-2">Prix final : {{finalPrice()}}€</span>
+                            <div class="py-3">
+                                <input type="text" placeholder="taper votre code promo" [(ngModel)]="promoCode"
+                                    class="btnCodPromo2 pl-2 py-1">
+                                <button class="btnCodPromo px-4 py-1" (click)="getCodePromo()"> Go</button>
+                            </div>
+                            <button class="btn primary" routerLink="/order"
+                                [queryParams]="{type: type}">Commander</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<app-footer></app-footer>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- *ngIf="restaurant"
+ <section>
+    <div class="container-fluid">
+        <div class="row p-4">
+            <div class=" col-12 products px-0">
+            <app-search [receptions]="receptions" [receptionType]="receptionType"
+                (myEvent)="onReceptionTypeChange($event)">
+            </app-search>
+            
+                <div class="product_image background-center-cover "
+                    style="background-image: url({{restauImgUrl}}{{restaurant.cover_picture}})">
+                    <div class="ml-4">
+                        <img src="{{restauImgUrl}}{{restaurant.logo}}" class="ml-4" />
+                    </div>
+                    <div class="delivery ml-4">
+                        <div class="d-flex ">
+                            <h1> {{ restaurant.name }} </h1>
+                            <img class="pl-1" (click)="openPopUp()"
+                                src="../../assets/img/social_media_picto/restauIcon.svg" />
+                        </div>
+                        <p class="">{{ restaurant.description }} </p>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="d-flex  justify-content-between">
+                                    <div class="d-flex">
+                                        <ngb-rating class="rate" [rate]="restaurant.score" [readonly]="true" [max]=5>
+                                        </ngb-rating>
+                                        <span class="">({{ restaurant.nbr_evaluation }})</span>
+                                        <p class="px-3">min. {{ restaurant.minimum_per_order }} €</p>
+                                        <p>{{ restaurant.delivery_time }} min</p>
+                                    </div>
+                                    <p class="d-flex justify-content-end pr-3">{{ restaurant.address }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+        </div>
+    </div>
+</section>-->

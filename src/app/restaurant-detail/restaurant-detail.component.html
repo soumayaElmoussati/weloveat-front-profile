@@ -1,0 +1,62 @@
+<!-- slug = {{ slug }} -->
+
+<section>
+    <div class="container-fluid" *ngIf="restaurant">
+        <div class="row px-4">
+            <div class=" col-12  px-0">
+                <div class="row">
+                    <div class="col-2">
+                        <img src="../../assets/img/social_media_picto/logo.svg" class="logoApp my-2" />
+                    </div>
+                    <div class="col-10">
+                        <app-search [receptions]="receptions" [receptionType]="receptionType">
+                        </app-search>
+                    </div>
+                </div>
+                <app-restaurant-details-header [restaurant]="restaurant">
+                </app-restaurant-details-header>
+            </div>
+            <div class="col-12 menuScroll px-0">
+                <ul class="list-inline px-3">
+                    <li class="list-inline-item ml-4" *ngFor="let cat of categoories">
+                        <a (click)="scroll(cat.category.id)">
+                            <h3 class="pb-3">{{cat.category.name }} </h3>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- <button mat-button (click)="openDialog()">jjjjjjh</button> -->
+            <!-- <div class="row"> -->
+            <div class="col-12 px-0">
+                <ul class="list-inline">
+                    <li class="" *ngFor="let cat of categoories">
+                        <h2 id="cat_{{cat.category.id}}" class="pt-3 pl-2"> {{cat.category.name }} </h2>
+                        <div class="row" id="">
+                            <div class="col-4" *ngFor="let foo of cat.products">
+                                <div class="row h-100 p-3 ">
+                                    <div class="col-12 menu">
+                                        <div class="row">
+                                            <div class="col-8  py-2 cursor-pointer" (click)="openDialog(foo.slug)">
+                                                <h3 class="py-2"> {{foo.name }}</h3>
+                                                <p class="pb-3"> {{foo.description }}</p>
+                                                <h3 class="mb-0"> {{foo.price }}€</h3>
+                                            </div>
+                                            <div class="col-4 p-0 ">
+                                                <div class="background-center-cover"
+                                                    style="background-image: url({{ProdImgUrl}}{{foo.picture}})">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <!-- </div> -->
+        </div>
+    </div>
+</section>
+<app-footer></app-footer>

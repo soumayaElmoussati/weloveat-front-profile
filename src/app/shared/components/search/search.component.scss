@@ -1,0 +1,55 @@
+ul.reception_list{
+    background: #ECF2F4;
+    border-radius: 25px;
+    li{
+      background: #ECF2F4;
+      box-sizing: border-box;
+      border-radius: 25px;
+      padding: 10px 8px 0px 8px;
+      &.active{
+        background: #FFFFFF;
+      }
+      p{
+        font-family: 'Poppins' !important; 
+        font-size: 13px;
+        line-height: 3px; 
+        text-align: center;
+        color: #5A5A5A;
+        //color: #A8A8A8;
+        cursor: pointer;
+      }
+  
+   
+    }
+  }
+  .mat-form-field-appearance-outline.address{
+    background: #ECF2F4 !important;
+    border-radius: 25px !important;
+    border: none !important;
+  }
+  .mat-form-field-appearance-outline .mat-form-field-flex {
+    background-color: #ECF2F4 !important;
+}
+  
+  .addressBtn{
+    width: 25%;
+ }
+ .searchBtn{
+   width:30%;
+ 
+ }
+  span{
+    position: absolute;
+    color: #FFFFFF;
+    background: #58C6FA;
+    border-radius: 50%;
+    border: none;
+    font-size: 12px;
+    width: 16px;
+    height: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 0px;
+    right: 12px;
+}

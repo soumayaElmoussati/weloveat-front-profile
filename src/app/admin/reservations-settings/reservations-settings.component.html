@@ -1,0 +1,46 @@
+
+<ng-container *transloco="let t">
+    <section>
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            <div class="row invitation">
+
+                  <div class="col-7">          
+                    <div class="content py-5 ">
+                        <h3> Les réservations, comment ça marche?</h3>
+                        <p>
+                            Rien de plus simple! Il suffit de remplir ci-dessous le nombre de places que vous avez de libres pour chaque jour d’ouveture. Weloveat s’occupe du reste!
+                        </p>  
+                   </div>
+
+                  <div class="row py-2">
+                      <div class="col">
+                        <div *ngFor="let res of reservationsList">
+                          <div class="col-sm-12 d-flex justify-content-start align-items-start mb-1">
+                            <span class="agenda mr-3"><p>{{ res.day }}</p></span>
+                            <span class="time_badge mr-3"><p>{{ res.morning_start_time }}</p></span> 
+                            <p class="py-2 mr-2">-</p> <span class="time_badge mr-2"><p>{{ res.morning_end_time }}</p></span>
+                            <span class="time_badge mr-3"><p>{{ res.evening_start_time }}</p></span> 
+                            <p class="py-2 mr-2">-</p>
+                            <span class="time_badge mr-3"><p>{{ res.evening_end_time }}</p></span> 
+                            <p class="py-2"> {{res.nbr_available_place}} </p> <p>places diponibles</p>
+                          </div>
+                        </div>
+                      </div>
+                  </div>
+               
+                </div>
+                
+                <div class="col-5 "></div>
+                
+
+            </div>
+          </div>
+      
+
+
+        </div>
+      </div>
+    </section>
+  </ng-container>

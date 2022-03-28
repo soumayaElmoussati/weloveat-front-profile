@@ -1,0 +1,70 @@
+<div class="annexes">
+
+    <div class="close-btn-outer">
+      <mat-icon mat-button mat-dialog-close>
+        <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M14 0C6.2 0 0 6.2 0 14C0 21.8 6.2 28 14 28C21.8 28 28 21.8 28 14C28 6.2 21.8 0 14 0ZM19.4 21L14 15.6L8.6 21L7 19.4L12.4 14L7 8.6L8.6 7L14 12.4L19.4 7L21 8.6L15.6 14L21 19.4L19.4 21Z"
+            fill="#423711" />
+        </svg>
+      </mat-icon>
+    </div>
+  
+    <div class="py-4 d-flex justify-content-center align-items-center">
+  
+      <form [formGroup]="categoryAdditionalForm" (ngSubmit)="onSubmit()">
+
+          <div class="row">
+            <div class="col-sm-12">
+              <mat-label class="pl-3 mb-1 d-block">Nom de l'annexe</mat-label>
+              <mat-form-field appearance="outline" class="mb-3">
+                <input matInput formControlName="name"  placeholder="Nom">
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col">
+              <mat-checkbox class="mb-3" formControlName="multi_select">
+                <span>Multi select</span>
+              </mat-checkbox>
+            </div>
+          </div>
+       
+
+          <div class="row">
+            <ng-container formArrayName="products" *ngFor="let product of products().controls; index as i">
+              <ng-container [formGroupName]="i">
+            <div class="col-8">
+              <mat-form-field appearance="outline" class="mb-3">
+                  <input matInput formControlName="name" placeholder="Option">
+                </mat-form-field>
+            </div>
+            <div class="col-4">
+              <mat-form-field appearance="outline" class="mb-3">
+                  <input matInput formControlName="price" placeholder="Price">
+                </mat-form-field>
+            </div>
+          </ng-container>
+        </ng-container>
+
+        <a (click)="addProduct()">
+          <svg width="11" height="10" viewBox="0 0 11 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M6.00065 4.9987H1.33398M6.00065 9.66536V4.9987V9.66536ZM6.00065 4.9987V0.332031V4.9987ZM6.00065 4.9987H10.6673H6.00065Z" stroke="#5A5A5A" stroke-width="2" stroke-linecap="round"/>
+              </svg>                        
+        </a>
+
+        </div>
+  
+          <div class="row">
+            <div class="col-sm-12 d-flex justify-content-center align-items-center">
+                <button class="btn-submit mr-3" type="submit"> Enregistrer </button>
+                <button class="btn-cancel" (click)="onCancel()"> Annuler </button>
+              </div>
+         </div> 
+  
+      </form>
+  
+    </div>
+  
+  </div>

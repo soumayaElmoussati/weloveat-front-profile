@@ -1,0 +1,157 @@
+
+<ng-container *transloco="let t">
+    <section class="profile-user" >
+
+        <div class="container-fluid">
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="row">
+                        <div class="col-6 comptes" >
+                            <div class="mollie">                           
+                                <div>                                  
+                                    <h3>{{t('Your account')}}</h3>
+                                    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                                        <img src="./../../../assets/img/User.svg"  alt="" class="image" >
+                                    </div>
+                                    <form [formGroup]="profileForm" (ngSubmit)="profileFormSubmit()" >
+                                        <div class="row">
+                                            <div class="col">
+                                                <mat-label class="pl-3 mb-1 d-block">Nom</mat-label>
+                                                <mat-form-field appearance="outline" class="mb-4">
+                                                    <input matInput formControlName="first_name" name="first_name" placeholder="Nom">
+                                                </mat-form-field>                                       
+                                            </div>
+                                            <div class="col">
+                                                <mat-label class="pl-3 mb-1 d-block">Prénom</mat-label>
+                                                <mat-form-field appearance="outline" class="mb-4">
+                                                    <input matInput  placeholder="Prénom" formControlName="last_name" name="last_name" >
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <mat-label class="pl-3 mb-1 d-block">Adresse</mat-label>
+                                                <mat-form-field appearance="outline" class="mb-4 ">
+                                                    <input matInput formControlName="address" name="address" placeholder="Adresse">
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+                                   <div class="row">
+                                       <div class="col">
+                                        <mat-label class="pl-3 mb-1 d-block">Ville</mat-label>
+                                        <mat-form-field appearance="outline" class=" mb-4">
+                                            <input matInput  placeholder="Ville" formControlName="city" name="city">  
+                                        </mat-form-field>
+                                       </div>
+                                       <div class="col">
+                                        <mat-label class="pl-3 mb-1 d-block">Code postal</mat-label>
+                                        <mat-form-field appearance="outline" class="mb-4">
+                                            <input matInput  placeholder="Code postal" formControlName="postal_code" name="postal_code">  
+                                        </mat-form-field>
+                                       </div>
+                                   </div>
+                                   <div class="row">
+                                       <div class="col">
+                                        <mat-label class="pl-3 mb-1 d-block">Email</mat-label>
+                                        <mat-form-field appearance="outline" class="mb-4">
+                                            <input matInput formControlName="email" name="email" placeholder="Email">
+                                        </mat-form-field>
+                                       </div>
+                                       <div class="col">
+                                        <mat-label class="pl-3 mb-1 d-block">Téléphone</mat-label>
+                                        <mat-form-field appearance="outline" class="mb-4">
+                                            <input matInput placeholder="Téléphone" formControlName="phone_number" name="phone_number">
+                                        </mat-form-field>
+                                       </div>
+                                   </div>
+                                   <div class="row">
+                                       <div class="col">
+                                        <button class="btn primary px-4 mr-3 mt-1" type="submit"> Modifier </button>
+                                       </div>
+                                   </div>                   
+                                </form>                      
+                             </div>
+                            </div>
+
+
+                            <div class="note">
+                                <div class="mollie">
+                                    <div>
+                                        <h4>{{t('Last grade given')}}</h4>
+                                        <p> Vous avez attributé 
+                                            <ngb-rating class="rate " [rate]="lastEvaluations.score" [readonly]="true" [max]=5></ngb-rating>
+                                            à <a href="">{{ lastEvaluations.evaluated.name }}</a> 
+                                            : "{{ lastEvaluations.description}}"
+                                        </p>                                      
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        
+                        <div class="col-6 orders">
+                                    <div class="py-4">
+                                        <h4> {{ t('Your last orders') }} </h4>                                                                            
+                                        <div class="orders_list">
+                                            <div class="d-flex  py-4" *ngFor="let orders of lastOrdersList ">
+                                                <div *ngIf= "orders.reception_type == 1">
+                                                    <svg width="15" height="39" viewBox="0 0 15 39" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M0 -0.000179291C8.28427 -0.000179291 15 8.54711 15 19.0907C15 29.6343 8.28427 38.1816 0 38.1816V-0.000179291Z" fill="#D9F4D2"/>
+                                                    </svg>   
+                                                </div>
+                                                <div *ngIf= "orders.reception_type == 2">
+                                                    <svg width="15" height="39" viewBox="0 0 15 39" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M0 -0.000179291C8.28427 -0.000179291 15 8.54711 15 19.0907C15 29.6343 8.28427 38.1816 0 38.1816V-0.000179291Z" fill="#58C6FA"/>
+                                                    </svg>   
+                                                </div>              
+                                                 <div class="content d-flex flex-column justify-content-center pl-3 w-100">
+                                                     <p class="color-secondary">{{orders.establishment_name}}</p>                                        
+                                                         <p> {{ orders.date }} à {{ orders.time }}</p>                                          
+                                                 </div>                                                   
+                                                 <div class="content d-flex flex-column  pl-3 w-100">
+                                                     <p *ngIf= "orders.reception_type == 1">Livraison</p>
+                                                     <p *ngIf= "orders.reception_type == 2">Emporter</p>
+                                                 </div>
+                                                 <div class="content d-flex flex-column  pl-3 w-100">
+                                                     <p>{{ orders.total_to_pay }} €</p> 
+                                                 </div>   
+                                          </div> 
+
+                                          <div class="col-sm-12 d-flex justify-content-center">
+                                            <a href="">Voir plus</a>
+                                          </div>
+
+                                          
+
+    
+                                            <div *ngIf="lastOrdersList==0">
+                                                <div class="d-flex justify-content-center align-items-center flex-column py-5 my-5">    
+                                                    <img src="../../assets/img/social_media_picto/pageNotFound.svg" />
+                                                    <p class="text-center pt-4">
+                                                        Vous n’avez pas encore passé de commande.<br>Revenez plus tard.                                                        
+                                                    </p>
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                      
+                                      
+                                    </div>
+                                                  
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+    </section>    
+</ng-container>    

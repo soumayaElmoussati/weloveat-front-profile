@@ -1,0 +1,83 @@
+<ng-container *transloco="let t">
+  <section>
+
+    <div class="container-fluid pt-3">
+      <div class="row">
+        <div class="col-sm-6 ">
+          <div class="row">
+            <div class="col-12 new_category">
+              <ul class="list-inline">
+                <li class="list-inline-item"><a (click)="currentLanguage.setValue('fr')">Fr</a></li>
+                <li class="list-inline-item"><a (click)="currentLanguage.setValue('en')">en</a></li>
+                <li class="list-inline-item"><a (click)="currentLanguage.setValue('nl')">nl</a></li>
+              </ul>
+              <form [formGroup]="productCategoryForm" (ngSubmit)="oncategoryFormSubmit()">
+                <div class="row">
+                  <div class="col">
+                    <mat-label class="pl-3 mb-1 d-block">Nom de la catégorie</mat-label>
+                    <mat-form-field appearance="outline" class="mb-3">
+                      <input matInput formControlName="name" placeholder="Nom">
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col pl-3 mb-1 d-block">
+                    <mat-slide-toggle formControlName="display">
+                      <span class="size-12 font-weight-400 text-pre-line">Afficher dans le menu</span>
+                    </mat-slide-toggle>
+                  </div>
+                </div>
+                <div class="pt-3">
+                  <button class="btn-submit" type="submit"> Ajouter </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="col-sm-6">
+          <div class="categories_list" cdkDropList (cdkDropListDropped)="drop($event)">
+            <div class="category" *ngFor="let cat of productCategoryList" >
+              <div class="row" cdkDrag>
+                <div class="col-sm-9">
+                  <p>{{cat.name}} </p>
+                </div>
+                <div class="col-sm-3 d-flex justify-content-end" >
+                  <a class="mr-2" >
+                    <svg width="18" height="17" viewBox="0 0 18 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        d="M3.4 6.25L1 8.5M1 8.5L3.4 10.75M1 8.5H17M6.6 3.25L9 1M9 1L11.4 3.25M9 1V16M11.4 13.75L9 16M9 16L6.6 13.75M14.6 6.25L17 8.5M17 8.5L14.6 10.75"
+                        stroke="#3D3D3D" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                  </a>
+                  <a class="mr-2" (click)="deleteProductCategory(cat,index)">
+                    <svg width="14" height="15" viewBox="0 0 14 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        d="M12.3504 5.03896L12.4277 5.03997C12.7148 5.06285 12.9348 5.29269 12.9501 5.56936L12.9427 5.72363L12.6982 8.61206L12.4417 11.4308C12.3874 11.9936 12.3389 12.4682 12.2969 12.8418C12.1512 14.1439 11.2747 14.9491 9.95337 14.973C7.89441 15.0097 5.91527 15.0094 3.99335 14.9694C2.71021 14.9435 1.8466 14.1296 1.70335 12.8475L1.60434 11.9028L1.43133 10.0705L1.25409 8.05978L1.05143 5.64615C1.02624 5.33648 1.25969 5.06526 1.57285 5.04035C1.85992 5.01752 2.11431 5.20959 2.17412 5.48029L2.1974 5.7015L2.3877 7.96423L2.59547 10.3096C2.68867 11.3249 2.76949 12.1466 2.83417 12.7237C2.9158 13.4544 3.31481 13.8304 4.01694 13.8446C5.92385 13.8843 7.88823 13.8846 9.93271 13.8481C10.6775 13.8347 11.0828 13.4623 11.1661 12.7179L11.2646 11.7783C11.2935 11.4887 11.3243 11.1691 11.3569 10.8218L11.5647 8.51521L11.815 5.55549C11.8381 5.27163 12.0706 5.05403 12.3504 5.03896ZM0.568881 3.74216C0.254708 3.74217 1.18876e-05 3.49033 4.16687e-10 3.17966C-1.08962e-05 2.89488 0.213988 2.65952 0.491647 2.62226L0.568838 2.61712L3.04709 2.61703C3.34159 2.61702 3.59941 2.42963 3.69162 2.15963L3.71418 2.07626L3.90673 1.12916C4.07632 0.501884 4.62704 0.0552612 5.27243 0.00486717L5.39448 0.000114231L8.60512 9.96265e-10C9.26123 -2.33424e-05 9.8406 0.409661 10.0637 1.04273L10.1012 1.16401L10.2855 2.07581C10.3434 2.36147 10.5797 2.57482 10.8656 2.61124L10.9527 2.61675L13.4311 2.61666C13.7453 2.61665 14 2.86849 14 3.17916C14 3.46394 13.786 3.69931 13.5084 3.73656L13.4312 3.7417L0.568881 3.74216ZM8.60517 1.12504L5.39453 1.12515C5.23491 1.12516 5.09304 1.21754 5.03411 1.33364L5.01413 1.38465L4.82981 2.29691C4.80726 2.40826 4.77459 2.51548 4.73285 2.61771L9.26705 2.6177C9.24099 2.55391 9.21846 2.48819 9.19972 2.42073L9.16993 2.29653L8.99386 1.41958C8.95271 1.26742 8.82564 1.15602 8.67231 1.13056L8.60517 1.12504Z"
+                        fill="#3D3D3D" />
+                    </svg>
+                  </a>
+                  <a (click)="edit(cat, index)">
+                    <svg width="16" height="15" viewBox="0 0 16 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        d="M15.4151 13.8611C15.7384 13.8614 16.0003 14.1165 16 14.431C15.9998 14.7193 15.7793 14.9574 15.4936 14.9949L15.4141 15L9.30706 14.9948C8.98377 14.9945 8.72191 14.7394 8.72218 14.4249C8.72243 14.1366 8.94285 13.8985 9.2286 13.861L9.30804 13.8559L15.4151 13.8611ZM9.4866 0.806899C10.5958 -0.270295 12.3933 -0.26877 13.5007 0.810304L14.6502 1.93054C15.7576 3.00962 15.756 4.75831 14.6469 5.8355L5.99181 14.2409C5.4969 14.7216 4.82624 14.9909 4.12646 14.9903L0.58488 14.9873C0.255879 14.9871 -0.00827646 14.7231 0.000198371 14.4032L0.0922797 10.9268C0.110558 10.2698 0.387464 9.6436 0.86555 9.17931L9.4866 0.806899ZM8.81512 3.06675L1.69269 9.98534C1.42694 10.2434 1.27275 10.5921 1.2626 10.9569L1.18578 13.8485L4.12744 13.8514C4.47358 13.8517 4.80655 13.7335 5.06947 13.5196L5.16467 13.4349L12.3224 6.48368L8.81512 3.06675ZM12.6721 1.61493C12.0216 0.981021 10.9653 0.980125 10.3137 1.61293L9.64426 2.26205L13.1506 5.67897L13.8197 5.02947C14.4351 4.43181 14.4701 3.48204 13.9241 2.84433L13.8217 2.73517L12.6721 1.61493Z"
+                        fill="#3D3D3D" />
+                    </svg>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+
+
+
+
+    </div>
+
+  </section>
+</ng-container>

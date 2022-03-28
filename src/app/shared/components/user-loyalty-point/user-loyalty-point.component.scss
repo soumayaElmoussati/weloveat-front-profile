@@ -1,0 +1,62 @@
+.loyaltyPoint{
+    background-image: url('../../../../assets/img/bgLoyaltyPoint.png');
+    position: relative;
+    width: 309px;
+    height: 168px; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    &:before{
+        content: "";
+        background: linear-gradient(90deg, #D9F4D2 0%, #58C6FA 100%);
+        position: absolute;
+        width: 309px;
+        height: 168px; 
+        left: 0;
+        top: 0;
+    }
+    span{
+        position: absolute;
+        font-family: 'Coolvetica' !important;
+        font-size: 48px !important;
+        line-height: 20px;        
+        color: #FFFFFF;
+        left: 20px;
+        top: 60px;
+    }
+    h4{
+        position: absolute;
+        font-family: 'Coolvetica' !important;
+        font-size: 20px !important;
+        line-height: 20px;        
+        color: #FFFFFF;
+        left: 20px;
+        top: 20px;
+    }
+    p{
+        position: absolute;
+        font-family: 'Coolvetica' !important;
+        font-size: 20px !important;
+        line-height: 20px;        
+        color: #FFFFFF;
+        left: 73px;
+        top: 50px;
+    }
+    .loyaltyPointImg{
+        position: absolute;
+        right: 15px;
+    }
+    .btn.use {
+        position: absolute;
+        text-align: center;
+        color: #A8A7A7;
+        background-color: var(--white_color);
+        padding: 10px 18px !important;
+        font-family: 'poppins' !important;
+        font-size: 13px !important;
+        bottom: 15px;
+        left: 20px;       
+    }
+    
+    
+}

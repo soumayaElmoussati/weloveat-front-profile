@@ -1,0 +1,218 @@
+
+<ng-container *transloco="let t">
+    <section class="establishment-section" >
+
+        <div class="container-fluid">
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="row">
+                        <div class="col-6 comptes" >
+                            <div class="mollie">                           
+                                <div>                                  
+                                    <h3>A propos de l’établissement</h3>  
+
+                                    <form  [formGroup]="establishmentForm" (ngSubmit)="establishmentFormSubmit()">
+                                        <div class="row">
+                                            <div class="col">
+                                                <mat-label class="pl-3 mb-1 d-block">Nom de l’établissement</mat-label>
+                                                <mat-form-field appearance="outline" class="mb-4">
+                                                    <input matInput formControlName="name" name="name">
+                                                </mat-form-field>                                       
+                                            </div>
+                                        </div>
+                                
+                                        <div class="row">
+                                            <div class="col">
+                                                <mat-label class="pl-3 mb-1 d-block">Adresse</mat-label>
+                                                <mat-form-field appearance="outline" class="mb-4">
+                                                    <input matInput formControlName="address" name="address">
+                                                </mat-form-field>                                       
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col">
+                                                <mat-label class="pl-3 mb-1 d-block">Description</mat-label>
+                                                <mat-form-field appearance="outline" class="mb-4">
+                                                    <input matInput formControlName="description" name="description">
+                                                </mat-form-field>                                       
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col">
+                                                <mat-label class="pl-3 mb-1 d-block">Site web</mat-label>
+                                                <mat-form-field appearance="outline" class="mb-4">
+                                                    <input matInput formControlName="web_site" name="web_site">
+                                                </mat-form-field>                                       
+                                            </div>
+                                        </div>
+
+                                   <div class="row">
+                                       <div class="col">
+                                        <button class="btn-confirm px-4 mr-3 mt-1" type="submit"> Enregistrer </button>
+                                       </div>
+                                   </div>  
+                                   
+                                
+
+                                </form>                      
+                             </div>
+                            </div>
+
+                            <div class="mollie">                           
+                                <div>                                  
+                                    <h3>Heures d’ouvertures</h3>  
+                                    <div>              
+                                        <form [formGroup]="horaireOuvertureForm" >
+
+                                            <div class="row">
+                                                <div class="col">
+                                                    Mêmes horaires tous les jours <mat-slide-toggle></mat-slide-toggle>
+                                                </div>
+                                            </div>
+
+                                            <div class="row py-2">
+                                                <div class="col" >
+                                                    <div *ngFor="let open of establishmentDetail?.opening_times">
+                                                        <div class="col-sm-12 d-flex justify-content-start align-items-start mb-1">
+                                                            <span class="agenda mr-3"><p>{{ open.day }}</p></span>
+                                                            <span class="time_badge mr-3"><p>{{ open.morning_start_time }}</p></span> 
+                                                            <p class="py-2 mr-2">-</p> <span class="time_badge mr-2"><p>{{ open.morning_end_time }}</p></span>
+                                                            <span class="time_badge mr-3"><p>{{ open.evening_start_time }}</p></span> 
+                                                            <p class="py-2 mr-2">-</p> <span class="time_badge mr-2"><p>{{ open.evening_end_time }}</p></span>
+                                                         
+                                                            <a class="mr-3 py-2">
+                                                                <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                    <rect width="25" height="25" rx="4" transform="matrix(-1 0 0 1 25 0)" fill="#F6F6F6"/>
+                                                                    <path d="M13.5 9V16M10 12.5H17" stroke="#5F5F5F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                                </svg>                                                                    
+                                                            </a>                            
+                                                            <a class="py-2">
+                                                            <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                <rect width="25" height="25" rx="4" transform="matrix(-1 0 0 1 25 0)" fill="#ED3024"/>
+                                                                <path d="M16 10L10 16M10 10L16 16" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                            </svg>
+                                                         </a>
+                                                        </div>                      
+                                                    </div>
+                                    
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col">
+                                                  <a class="save-modification"> Enregistrer les modifications </a>
+                                                </div>
+                                            </div>  
+
+                                        </form>                                                                              
+                                    </div>               
+                              </div>
+                            </div>
+
+                            <div class="mollie">                           
+                                <div>                                  
+                                    <h3>Tarifs de livraison par commune</h3>  
+                                    <div class="d-flex justify-content-start align-items-center pl-3">
+                                        <p>Mes zones de livraison</p> 
+                                         <a (click)="addZoneDelivery()" class="mr-2">
+                                            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M6.9987 0.582031C3.45495 0.582031 0.582031 3.45495 0.582031 6.9987C0.582031 10.5424 3.45495 13.4154 6.9987 13.4154C10.5424 13.4154 13.4154 10.5424 13.4154 6.9987C13.4154 3.45495 10.5424 0.582031 6.9987 0.582031ZM7.58203 9.33203C7.58203 9.48674 7.52057 9.63511 7.41118 9.74451C7.30178 9.85391 7.15341 9.91536 6.9987 9.91536C6.84399 9.91536 6.69562 9.85391 6.58622 9.74451C6.47682 9.63511 6.41536 9.48674 6.41536 9.33203V7.58203H4.66536C4.51065 7.58203 4.36228 7.52057 4.25289 7.41118C4.14349 7.30178 4.08203 7.15341 4.08203 6.9987C4.08203 6.84399 4.14349 6.69562 4.25289 6.58622C4.36228 6.47682 4.51065 6.41536 4.66536 6.41536H6.41536V4.66536C6.41536 4.51065 6.47682 4.36228 6.58622 4.25289C6.69562 4.14349 6.84399 4.08203 6.9987 4.08203C7.15341 4.08203 7.30178 4.14349 7.41118 4.25289C7.52057 4.36228 7.58203 4.51065 7.58203 4.66536V6.41536H9.33203C9.48674 6.41536 9.63511 6.47682 9.74451 6.58622C9.85391 6.69562 9.91536 6.84399 9.91536 6.9987C9.91536 7.15341 9.85391 7.30178 9.74451 7.41118C9.63511 7.52057 9.48674 7.58203 9.33203 7.58203H7.58203V9.33203Z" fill="#5A5A5A"/>
+                                            </svg>
+                                         </a>                                           
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col">
+                                            <div *ngFor="let delivery_zone of establishmentDetail?.delivery_zones">
+                                                <div class="d-flex justify-content-start align-items-center pl-3">
+                                                    <span class="badge_geographic_name mr-3"><p>{{ delivery_zone.geographic_name }}</p></span>
+                                                    <span class="badge_delivery_zone mr-3"><p>coût: {{delivery_zone.shipping_cost}}€</p></span>
+                                                    <span class="badge_delivery_zone mr-3"><p>{{delivery_zone.delivery_time}} min</p></span>
+                                                    <span class="badge_delivery_zone mr-3"><p>àpd {{delivery_zone.minimum_per_order}} €</p></span>
+
+                                                  <a class="py-2" (click)="deleteZoneDelivery(delivery_zone)" >
+                                                        <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <rect width="25" height="25" rx="4" transform="matrix(-1 0 0 1 25 0)" fill="#ED3024"/>
+                                                            <path d="M16 10L10 16M10 10L16 16" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                        </svg>                                                                  
+                                                    </a>
+                                                </div> 
+
+                                            </div>                                           
+                                        </div>
+                                    </div>
+                                                                               
+                               </div>
+                            </div>
+
+
+                        </div>
+
+
+                        
+                        <div class="col-6 company">
+                                                                                
+                            <div class="mollie">
+                                <div>
+                                    <h3>Votré établissement sur weloveat</h3> 
+                                  <div class="d-flex justify-content-start align-items-center pl-3">
+                                      <div class="mr-3">
+                                        <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M6.4987 1.35547L12.457 11.6471H0.540367L6.4987 1.35547Z" stroke="#ED3024" stroke-linejoin="round"/>
+                                            <path d="M6.5 9.48047V9.7513" stroke="#ED3024" stroke-linecap="round"/>
+                                            <path d="M6.5 5.14844L6.49783 7.85677" stroke="#ED3024" stroke-linecap="round"/>
+                                        </svg>
+                                      </div>                               
+                                    <p>
+                                        Attention, apporter des changement aux affirmations ci-dessous aura une incidence sur votre compte.
+                                    </p>
+                                  </div>
+                                   
+                                     <div *ngFor="let rec of receptionTypeList">
+
+                                        <div class="d-flex justify-content-start align-items-center" >
+                                            <div class="establishment_badge mr-3 mb-2">
+                                              <img src="../assets/img/{{rec.name}}.svg" alt="">                                             
+                                              </div>                            
+                                         </div>
+                                         
+
+                                         <mat-radio-group >
+                                            <mat-radio-button [value]="rec" >{{rec.name}}</mat-radio-button>                                       
+                                        </mat-radio-group>
+                                      </div>
+                                 
+                            
+
+                                
+                           
+                              </div>
+                            </div>
+                            <div class="mollie">
+                                
+                                <div>
+                                    <h3>Informations de la société</h3>  
+
+    
+                                    
+                                </div>
+                            </div>             
+                                
+                                                  
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+    </section>    
+</ng-container>    

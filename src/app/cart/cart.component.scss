@@ -1,0 +1,161 @@
+
+/* Importing poppins font */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap');
+table{
+  width: 100%;
+tr{
+ 
+  th{
+    padding: 15px;
+    font-family: 'Coolvetica' !important;
+    font-size: 14px;
+    color: #5A5A5A;
+  }
+  td{
+    padding: 15px;
+    p{
+      padding: 15px;
+      font-family: 'Coolvetica' !important;
+      font-size: 14px;
+      color: #5A5A5A;
+    }
+  }
+}
+td{
+  border-top: 2px solid #DEDEDE;
+}
+
+}
+
+span{
+  font-family: 'Poppins' !important;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  border-top: 2px solid #DEDEDE;
+}
+.btnCodPromo{
+background: #58C6FA;
+border-radius: 0px 15px 15px 0px;
+border: 1px solid #9ED1F4 !important;
+color: #FFFFFF ;
+}
+.btnCodPromo2{
+  background: #FFFFFF;
+  border: 1px solid #9ED1F4;
+  box-sizing: border-box;
+  border-radius: 15px 0px 0px 15px;
+}
+ .btnAdd{
+  span{
+    color:#FFFFFF;
+    background: #58C6FA;
+    border-radius: 50%;
+    border: none;
+    padding: 0px 6px;
+  }
+
+}
+ .prodW{
+   width:100px;
+ }
+.quantity{
+  p{
+    font-size: 14px;
+  }
+}
+.quantity{
+ width: 150px;
+}
+.price{
+  width: 150px;
+}
+.totalPrice{
+  width: 150px;
+}
+.logoApp{
+  width: 150px;
+    height: 55px;
+}
+.background-center-cover{
+  width: 120px;
+  height: 120px;
+   }
+   .takeAwayFooter{
+    background-image: url(../../assets/img/footer.png);
+    position: relative;
+    width: 1903px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 593px;
+    margin-top: 150px;
+}
+.loyaltyPoint{
+  background-image: url('../../assets/img/bgLoyaltyPoint.png');
+  position: relative;
+  width: 309px;
+  height: 168px; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  &:before{
+      content: "";
+      background: linear-gradient(90deg, #D9F4D2 0%, #58C6FA 100%);
+      position: absolute;
+      width: 309px;
+      height: 168px; 
+      left: 0;
+      top: 0;
+      opacity: 0.7;
+    
+  }
+  span{
+      position: absolute;
+      font-family: 'Coolvetica' !important;
+      font-size: 48px !important;
+      line-height: 20px;        
+      color: #FFFFFF;
+      left: 20px;
+      top: 60px;
+  }
+  h4{
+      position: absolute;
+      font-family: 'Coolvetica' !important;
+      font-size: 20px !important;
+      line-height: 20px;        
+      color: #FFFFFF;
+      left: 20px;
+      top: 20px;
+  }
+  p{
+      position: absolute;
+      font-family: 'Coolvetica' !important;
+      font-size: 20px !important;
+      line-height: 20px;        
+      color: #FFFFFF;
+      left: 73px;
+      top: 50px;
+  }
+  .loyaltyPointImg{
+      position: absolute;
+      right: 15px;
+  }
+  .btn.use {
+      position: absolute;
+      text-align: center;
+      color: #A8A7A7;
+      background-color: var(--white_color);
+      padding: 0px 18px !important;
+      font-family: 'poppins' !important;
+      font-size: 13px !important;
+      bottom: 15px;
+      left: 20px;       
+  }
+}
+.result{
+  h3{
+        color: #5A5A5A !important;
+  }
+}

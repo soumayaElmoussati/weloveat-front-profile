@@ -1,0 +1,94 @@
+<!-- slug = {{ slug }} -->
+
+<section class=" p-0">
+    <div class="container-fluid ">
+        <div class="row p-0 ">
+            <div class="col-12 p-0">
+                <div class="products">
+                    <div class="product_image background-center-cover"
+                        style="background-image:  url({{restauImgUrl}}{{data.cover_picture}})">
+                        <div mat-dialog-actions class="d-flex justify-content-end p-2">
+                            <div mat-dialog-close>
+                                <img src="../../assets/img/social_media_picto/close.svg" />
+                            </div>
+                        </div>
+                        <div class="delivery">
+                            <img src="{{restauImgUrl}}{{data.logo}}" class="logo mb-2" />
+                            <h1>{{data.name}}</h1>
+                            <p class=""> {{data.address}} </p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<mat-dialog-content class="m-0">
+    <div class="container-fluid ">
+        <div class="row p-0 ">
+            <div class="col-12 p-0">
+                <div class="products">
+                    <div class=" px-4">
+                        <div class="py-3 d-flex justify-content-center align-items-center">
+                            <h3 class="pr-1"> Description</h3>
+                            <div class="line"></div>
+                        </div>
+                    </div>
+                    <div class="px-5">
+                        <p>{{data.description}}</p>
+                    </div>
+                    <div class=" px-4">
+                        <div class="py-3 d-flex justify-content-center align-items-center">
+                            <h3 class="pr-1"> Site web</h3>
+                            <div class="line"></div>
+                        </div>
+                    </div>
+                    <a class="px-5">{{data.web_site}}</a>
+                    <div class=" px-4">
+                        <div class="py-3 d-flex justify-content-center align-items-center">
+                            <h3 class="pr-1"> Horaires de livraison</h3>
+                            <div class="line"></div>
+                        </div>
+                        <table class="table table-striped">
+                            <tbody>
+                                <tr *ngFor="let deliveryTimes of data.delivery_schedules">
+                                    <td class="pl-2 pr-4">{{deliveryTimes.day}}</td>
+                                    <td class="pl-3">{{deliveryTimes.morning_start_time}}-{{deliveryTimes.morning_end_time}} </td>
+                                    <td>{{deliveryTimes.evening_start_time}}-{{deliveryTimes.evening_end_time}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class=" px-4">
+                        <div class="py-3 d-flex justify-content-center align-items-center">
+                            <h3 class="pr-1 pl-2"> Horaires d’ouverture</h3>
+                            <div class="line"></div>
+                        </div>
+                        <table class="table table-striped">
+                            <tbody>
+                                <tr *ngFor="let openTimes of data.opening_times">
+                                    <td class="pl-2 pr-4">{{openTimes.day}}</td>
+                                    <td class="pl-3">{{openTimes.morning_start_time}}-{{openTimes.morning_end_time}} </td>
+                                    <td>{{openTimes.evening_start_time}}-{{openTimes.evening_end_time}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class=" px-4 pb-3">
+                        <div class="py-3 d-flex justify-content-center align-items-center">
+                            <h3 class="pr-1"> Frais de livraison</h3>
+                            <div class="line"></div>
+                        </div>
+                        <p>Montant commande minimum: 15€</p>
+                        <p>Livraison: gratuite</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</mat-dialog-content>
+<!-- <div mat-dialog-actions>
+    <button mat-button mat-dialog-close><img src="../../assets/img/social_media_picto/close.svg" /></button>
+</div> -->

@@ -1,0 +1,121 @@
+.products{
+    width: 100%;
+    height: 100%;
+    border-radius: 25px;
+    .product_image{
+        border-radius: 25px;
+        width: 100%;
+        height: 250px;
+        position: relative;
+        &:before{
+            content: "";
+            background: linear-gradient(180deg, rgba(196, 196, 196, 0) 0%, #313131 100%);
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            left:0;
+            top: 0;
+            border-radius: 25px !important;
+        }
+        .mat-icon{
+            right: 15px;
+            top: 0;
+        }
+        .delivery{
+            font-family: 'Poppins' !important;
+            position: absolute;
+            left: 0;
+            bottom: 10px;
+            padding-left: 25px;
+            font-size: 24px;
+            line-height: 36px;
+            color: #FFFFFF;
+            .logo{
+                max-height: 100px;
+            }
+        }
+        p{
+            font-family: 'Poppins' !important;
+            font-size: 13px !important;
+            color: #FFFFFF;
+            margin: 0px !important;
+        }
+        
+    }
+    
+    p{
+        font-family: 'Poppins' !important;
+        font-size: 13px;
+        color: #A8A8A8;
+        margin: 0px !important;
+        }
+        .mat-radio-button {
+            font-family: "Poppins" !important;
+            font-size: 13px;
+            line-height: 19px;
+            color: #767676 !important;
+        }
+        .borderIngred{
+            border: 1px solid #E5E5E5;
+            box-sizing: border-box;
+            border-radius: 25px;
+            width: 30%;
+        }
+        .borderComment{
+            border: 1px solid #E5E5E5;
+            box-sizing: border-box;
+            border-radius: 5px;
+            padding: 25px 25px 25px 25px;
+            width: 93%;
+        }
+}
+
+
+ ::ng-deep .mat-dialog-container {
+    padding: 0px !important;
+    border-radius: 25px !important;
+  }
+
+
+.mat-radio-button {
+    font-family: "Poppins" !important;
+    font-size: 13px;
+    line-height: 19px;
+    color: #A8A8A8;
+}
+.line{
+    border-bottom: 1px solid #DEDEDE;
+    width: 100%;
+}
+.table th, .table td {
+    padding: 0;
+    border:none;
+}
+
+table {
+    border-collapse: collapse;
+    width: 40%;
+
+ }
+
+ .table-striped tbody tr:nth-of-type(odd) {
+    background-color: #ECF2F4;
+}
+  
+// td {
+//     text-align: left;
+//     padding: 8px;
+// }
+// tr:nth-child(even){
+//     background-color:red !important;
+//     }
+
+// tr:nth-child(odd){
+//     background-color:black;
+//     }
+  
+// tr:nth-child(even) {
+//     background-color: Lightgreen;
+// }
+// .table td:nth-child(odd){background:white;}
+// .table td:nth-child(even){background:blue;}

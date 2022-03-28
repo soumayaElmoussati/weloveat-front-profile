@@ -1,0 +1,120 @@
+<ng-container *transloco="let t">
+    <section class="orders-panel">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+
+            <div  class="row h-100">
+                <div class="col-md-6 orders" >
+                  <div>
+                    <div class="">
+                      <h2>Réservations</h2>
+                      <div class="col-sm-3 justify-content-end">
+                        <mat-form-field appearance="outline">
+                           <input matInput [matDatepicker]="picker" [formControl]="dateReservation" (click)="picker.open()" readonly>
+                           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                           <mat-datepicker #picker></mat-datepicker>
+                        </mat-form-field>
+                       </div>
+                     </div>
+                     
+                      <div  class="orders_list" >                           
+                                <div class="d-flex  py-4" *ngFor="let res of reservationsList">
+
+                                  <div *ngIf="reservationsList">
+                                    <svg width="15" height="39" viewBox="0 0 15 39" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M0 -0.000179291C8.28427 -0.000179291 15 8.54711 15 19.0907C15 29.6343 8.28427 38.1816 0 38.1816V-0.000179291Z" fill="#D9F4D2"/>
+                                    </svg>   
+                                 </div>    
+                                                                  
+                                     <div class="content d-flex flex-column justify-content-center pl-3 w-100">
+                                         <p class="color-secondary">{{res.first_name}}  {{res.last_name}}</p>                                        
+                                             <p>{{res.created_at_date}} {{res.created_at_time}}</p>                                          
+                                     </div>
+                                                                       
+
+                                     <div class="content d-flex flex-column  pl-3 w-100">
+                                        <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                          <path fill-rule="evenodd" clip-rule="evenodd" d="M5 0.00390625C3.67392 0.00390625 2.40215 0.53069 1.46447 1.46837C0.526784 2.40605 0 3.67782 0 5.00391V15.0039C0 16.33 0.526784 17.6018 1.46447 18.5394C2.40215 19.4771 3.67392 20.0039 5 20.0039H15C16.3261 20.0039 17.5979 19.4771 18.5355 18.5394C19.4732 17.6018 20 16.33 20 15.0039V5.00391C20 3.67782 19.4732 2.40605 18.5355 1.46837C17.5979 0.53069 16.3261 0.00390625 15 0.00390625H5ZM13.73 8.68791C13.8198 8.59204 13.8899 8.47942 13.9362 8.35648C13.9825 8.23354 14.0041 8.10268 13.9998 7.97138C13.9956 7.84008 13.9655 7.7109 13.9113 7.59123C13.8571 7.47156 13.7799 7.36373 13.684 7.27391C13.5881 7.18408 13.4755 7.11402 13.3526 7.06772C13.2296 7.02142 13.0988 6.99979 12.9675 7.00406C12.8362 7.00833 12.707 7.03842 12.5873 7.09261C12.4677 7.14681 12.3598 7.22404 12.27 7.31991L9.187 10.6099L7.664 9.25691C7.46446 9.09103 7.20825 9.0092 6.9495 9.02872C6.69075 9.04825 6.44972 9.16758 6.27732 9.36153C6.10493 9.55547 6.01467 9.80883 6.02562 10.0681C6.03657 10.3273 6.14787 10.5722 6.336 10.7509L8.586 12.7509C8.78069 12.9238 9.03515 13.014 9.29529 13.0023C9.55543 12.9905 9.80072 12.8777 9.979 12.6879L13.729 8.68791H13.73Z" fill="#86BB25"/>
+                                        </svg>                                                      
+                                    </div>
+
+                                    <div class="content d-flex flex-column  pl-3 w-100">
+                                      <p >{{res.date}}</p>
+                                   </div> 
+
+                                     <div class="content d-flex flex-column  pl-3 w-100">
+                                      <p>{{res.time}}</p> 
+                                     </div>  
+                                     
+                                  <div class="content d-flex flex-column  pl-3 w-100">
+                                    <p>{{ res.persons_number }} personnes</p> 
+                                  </div> 
+                                   
+                                 </div> 
+ 
+                       </div>                    
+                    </div>
+                </div>
+    
+                <div class="col-md-6 orders" >
+                  <div>
+                     <div class="border-bottom">
+                       <h2>{{ t('REQUESTS') }}</h2>
+                     </div>
+                  
+                    <div  class="orders_list " >                           
+  
+                              <div class="d-flex  py-4" *ngFor="let req of requestsList">
+                                  <div *ngIf="requestsList">
+                                      <svg width="15" height="39" viewBox="0 0 15 39" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                          <path fill-rule="evenodd" clip-rule="evenodd" d="M0 -0.000179291C8.28427 -0.000179291 15 8.54711 15 19.0907C15 29.6343 8.28427 38.1816 0 38.1816V-0.000179291Z" fill="#D9F4D2"/>
+                                      </svg>   
+                                  </div>                                  
+                                   <div class="content d-flex flex-column justify-content-center pl-3 w-100">
+                                       <p class="color-secondary">{{req.first_name}} {{req.last_name}}</p>                                        
+                                           <p> {{req.created_at_date}} à {{req.created_at_time}}</p>                                          
+                                   </div>
+                                   <div class="content d-flex flex-column  pl-3 w-100">
+                                       <p >{{req.date}}</p>
+                                   </div> 
+
+                                   <div class="content d-flex flex-column  pl-3 w-100">
+                                       <p>{{req.time}}</p> 
+                                </div>  
+                                   
+                                   <div class="content d-flex flex-column  pl-3 w-100">
+                                       <p>{{ req.persons_number }} personnes</p> 
+                                   </div>  
+                                <div class="content d-flex flex-column  pl-3 w-100">
+                                  <a (click)="acceptReservation(req)">
+                                    <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                      <path fill-rule="evenodd" clip-rule="evenodd" d="M5 0.00390625C3.67392 0.00390625 2.40215 0.53069 1.46447 1.46837C0.526784 2.40605 0 3.67782 0 5.00391V15.0039C0 16.33 0.526784 17.6018 1.46447 18.5394C2.40215 19.4771 3.67392 20.0039 5 20.0039H15C16.3261 20.0039 17.5979 19.4771 18.5355 18.5394C19.4732 17.6018 20 16.33 20 15.0039V5.00391C20 3.67782 19.4732 2.40605 18.5355 1.46837C17.5979 0.53069 16.3261 0.00390625 15 0.00390625H5ZM13.73 8.68791C13.8198 8.59204 13.8899 8.47942 13.9362 8.35648C13.9825 8.23354 14.0041 8.10268 13.9998 7.97138C13.9956 7.84008 13.9655 7.7109 13.9113 7.59123C13.8571 7.47156 13.7799 7.36373 13.684 7.27391C13.5881 7.18408 13.4755 7.11402 13.3526 7.06772C13.2296 7.02142 13.0988 6.99979 12.9675 7.00406C12.8362 7.00833 12.707 7.03842 12.5873 7.09261C12.4677 7.14681 12.3598 7.22404 12.27 7.31991L9.187 10.6099L7.664 9.25691C7.46446 9.09103 7.20825 9.0092 6.9495 9.02872C6.69075 9.04825 6.44972 9.16758 6.27732 9.36153C6.10493 9.55547 6.01467 9.80883 6.02562 10.0681C6.03657 10.3273 6.14787 10.5722 6.336 10.7509L8.586 12.7509C8.78069 12.9238 9.03515 13.014 9.29529 13.0023C9.55543 12.9905 9.80072 12.8777 9.979 12.6879L13.729 8.68791H13.73Z" fill="#86BB25"/>
+                                    </svg>   
+                                  </a>                                                                  
+                                </div>
+
+                                <div class="content d-flex flex-column  pl-3 w-100">
+                                  <a (click)="refuseReservation(req)">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                      <path d="M13.414 12L16.243 9.172C16.3359 9.07909 16.4096 8.96879 16.4599 8.8474C16.5102 8.726 16.5361 8.5959 16.5361 8.4645C16.5361 8.33311 16.5102 8.203 16.4599 8.0816C16.4096 7.96021 16.3359 7.84991 16.243 7.757C16.1501 7.66409 16.0398 7.59039 15.9184 7.54011C15.797 7.48982 15.6669 7.46394 15.5355 7.46394C15.4041 7.46394 15.274 7.48982 15.1526 7.54011C15.0312 7.59039 14.9209 7.66409 14.828 7.757L12 10.586L9.172 7.757C8.98436 7.56936 8.72986 7.46394 8.4645 7.46394C8.19914 7.46394 7.94464 7.56936 7.757 7.757C7.56936 7.94464 7.46394 8.19914 7.46394 8.4645C7.46394 8.5959 7.48982 8.726 7.54011 8.8474C7.59039 8.96879 7.66409 9.07909 7.757 9.172L10.586 12L7.757 14.828C7.56936 15.0156 7.46394 15.2701 7.46394 15.5355C7.46394 15.8009 7.56936 16.0554 7.757 16.243C7.94464 16.4306 8.19914 16.5361 8.4645 16.5361C8.72986 16.5361 8.98436 16.4306 9.172 16.243L12 13.414L14.828 16.243C15.0156 16.4306 15.2701 16.5361 15.5355 16.5361C15.8009 16.5361 16.0554 16.4306 16.243 16.243C16.4306 16.0554 16.5361 15.8009 16.5361 15.5355C16.5361 15.2701 16.4306 15.0156 16.243 14.828L13.414 12ZM6 2H18C19.0609 2 20.0783 2.42143 20.8284 3.17157C21.5786 3.92172 22 4.93913 22 6V18C22 19.0609 21.5786 20.0783 20.8284 20.8284C20.0783 21.5786 19.0609 22 18 22H6C4.93913 22 3.92172 21.5786 3.17157 20.8284C2.42143 20.0783 2 19.0609 2 18V6C2 4.93913 2.42143 3.92172 3.17157 3.17157C3.92172 2.42143 4.93913 2 6 2Z" fill="#ED3024"/>
+                                      </svg>   
+                                  </a>
+                                                                                             
+                               </div>
+
+                                 
+                          </div> 
+                     </div>                    
+                  </div>
+              </div>
+
+
+
+            </div>
+          </div>
+         
+        </div>
+      </div>
+    </section>
+  </ng-container>

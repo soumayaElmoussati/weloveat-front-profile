@@ -1,0 +1,106 @@
+<!-- slug = {{ slug }} -->
+
+<section class="  p-0">
+    <div class="container-fluid ">
+        <div class="row p-0 ">
+            <div class="col-12 p-0">
+                <div class="products">
+                    <div class="product_image background-center-cover mb-0"
+                        style="background-image: url({{ProdImgUrl}}{{data.product.picture}})">
+                        <div mat-dialog-actions class="d-flex justify-content-end p-2">
+                            <div mat-dialog-close>
+                                <img src="../../assets/img/social_media_picto/close.svg" />
+                            </div>
+                        </div>
+                        <div class="delivery">
+                            <h1>{{ data.product.name }}</h1>
+                            <p class=""> {{ data.product.description }} </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<mat-dialog-content class="m-0">
+    <div class="container-fluid ">
+        <div class="row p-0 ">
+            <!-- total = {{ price }} -->
+            <div class="col-12 p-0">
+                <div class="products">
+                    <div class=" px-4" *ngFor="let category of data.product.additional_categories">
+                        <div class="py-3 d-flex justify-content-center align-items-center">
+                            <h3 class="pr-1"> {{category.name}}</h3>
+                            <div class="line"></div>
+                        </div>
+                        <mat-radio-group *ngIf="!category.multi_select" class="radio-button px-2">
+                            <mat-radio-button class="d-table" [value]="annexe" *ngFor="let annexe of category.products"
+                                (click)="addToItem(annexe, category.name , category.multi_select)">
+                                {{annexe.name}}
+                            </mat-radio-button>
+                        </mat-radio-group>
+                        <div *ngIf="category.multi_select" class="  px-2">
+                            <mat-checkbox class="d-table categoryBox"
+                                (click)="addToItem(annexe, category.name , category.multi_select)"
+                                *ngFor="let annexe of category.products">
+                                {{annexe.name}} <ng-container *ngIf="annexe.price">({{annexe.price}} €)</ng-container>
+                            </mat-checkbox>
+                        </div>
+                    </div>
+                    <div class="px-4">
+                        <div class="py-3 d-flex justify-content-center align-items-center">
+                            <h3 class="pr-1">Personnaliser</h3>
+                            <div class="line"></div>
+                        </div>
+                        <div class="borderIngred cursor-pointer  px-2 py-1 mb-2 "
+                            [ngClass]="{'active': isSelected(ingredient, 'custom', true) }"
+                            *ngFor="let ingredient of data.product.ingredients"
+                            (click)="addToItem(ingredient, 'custom', true)">
+                            <div class=" d-flex  justify-content-around">
+                                <p class=" ">sans {{ingredient.name}}</p>
+                                <div *ngIf="isSelected(ingredient, 'custom', true); else noSelected">
+                                    <svg width="12"  viewBox="0 0 12 10" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M1.33301 5L4.83301 8.5L10.6663 1.5" stroke-width="2" 
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </div>
+                                <ng-template #noSelected>
+                                    <svg width="12" viewBox="0 0 12 10" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M1.33301 5L4.83301 8.5L10.6663 1.5" stroke-width="2" 
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </ng-template>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="line my-3"></div>
+                    <!-- <div class="borderComment mx-4"> -->
+                    <!-- <input type="text" class="borderComment mx-4" name="" placeholder="commentaire"> -->
+                    <!-- </div> -->
+                    <textarea name="" id="" class="borderComment mx-4 mb-3" placeholder="commentaire" cols="4" rows="4"
+                        [(ngModel)]="comment"></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions class="d-flex  justify-content-center my-2">
+    <div class="cc d-flex  justify-content-center ">
+        <div class="d-flex align-items-center addQte px-2">
+            <a (click)="decrementQte()"><img src="../../assets/img/social_media_picto/moins.svg" alt=""></a>
+            <p class="px-2 m-0">{{increment}}</p>
+            <a (click)="incrementQte()"><img src="../../assets/img/social_media_picto/plus.svg" alt=""></a>
+        </div>
+        <button mat-dialog-close class="addOrder p-2 " (click)="addProduct()">
+            <p> Ajouter à la commande {{ price}} € </p>
+        </button>
+    </div>
+</mat-dialog-actions>
+
+<!-- <div mat-dialog-actions>
+    <button mat-button mat-dialog-close><img src="../../assets/img/social_media_picto/close.svg" /></button>
+</div> -->

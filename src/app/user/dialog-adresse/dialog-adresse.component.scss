@@ -1,0 +1,60 @@
+
+.adresses{
+
+    width: 889px;
+    height: 600px;
+
+    h4{
+        font-family: Poppins;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 21px;
+        color: #5A5A5A;
+        text-align: left;
+    }
+ 
+
+}
+
+.mat-button{
+
+    background: #5A5A5A;
+    border-radius: 5px;
+    height: 48px;
+    width: 181px;
+    font-family: Poppins;
+    font-weight: normal;
+    font-size: 13px;
+    line-height: 19px;
+    text-align: center;
+    color: #FFFFFF;
+    font-style: normal;    
+
+}
+
+.close-btn-outer {
+    position: relative;
+    float: right;
+
+  }
+  
+.btn-submit{
+    width: 181px;
+    height: 48px;
+    background: #5A5A5A;
+    border-radius: 5px;
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 13px;
+    text-align: center;
+    color: #FFFFFF;
+}
+
+
+
+::ng-deep .mat-dialog-container{
+    border-radius: 30px !important;
+}
+

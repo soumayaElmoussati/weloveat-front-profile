@@ -1,0 +1,173 @@
+
+<ng-container *transloco="let t">
+    <section class="profile-user" >
+
+        <div class="container-fluid">
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="row">
+                        <div class="col-7 comptes" >
+                            <div class="mollie">                           
+                                <div>                                  
+                                    <h3>{{t('Your account')}}</h3>
+                                    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                                        <img src="./../../../assets/img/User.svg"  alt="" class="image" >
+                                    </div>
+                                    <form [formGroup]="profileForm" (ngSubmit)="profileFormSubmit()" >
+                                        <div class="row">
+                                            <div class="col">
+                                                <mat-label class="pl-3 mb-1 d-block">Nom</mat-label>
+                                                <mat-form-field appearance="outline" class="mb-4">
+                                                    <input matInput formControlName="first_name" name="first_name" placeholder="Nom">
+                                                </mat-form-field>                                       
+                                            </div>
+                                            <div class="col">
+                                                <mat-label class="pl-3 mb-1 d-block">Prénom</mat-label>
+                                                <mat-form-field appearance="outline" class="mb-4">
+                                                    <input matInput  placeholder="Prénom" formControlName="last_name" name="last_name" >
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <mat-label class="pl-3 mb-1 d-block">Adresse</mat-label>
+                                                <mat-form-field appearance="outline" class="mb-4 ">
+                                                    <input matInput formControlName="address" name="address" placeholder="Adresse">
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+                                   <div class="row">
+                                       <div class="col">
+                                        <mat-label class="pl-3 mb-1 d-block">Ville</mat-label>
+                                        <mat-form-field appearance="outline" class=" mb-4">
+                                            <input matInput  placeholder="Ville" formControlName="city" name="city">  
+                                        </mat-form-field>
+                                       </div>
+                                       <div class="col">
+                                        <mat-label class="pl-3 mb-1 d-block">Code postal</mat-label>
+                                        <mat-form-field appearance="outline" class="mb-4">
+                                            <input matInput  placeholder="Code postal" formControlName="postal_code" name="postal_code">  
+                                        </mat-form-field>
+                                       </div>
+                                   </div>
+                                   <div class="row">
+                                       <div class="col">
+                                        <mat-label class="pl-3 mb-1 d-block">Email</mat-label>
+                                        <mat-form-field appearance="outline" class="mb-4">
+                                            <input matInput formControlName="email" name="email" placeholder="Email">
+                                        </mat-form-field>
+                                       </div>
+                                       <div class="col">
+                                        <mat-label class="pl-3 mb-1 d-block">Téléphone</mat-label>
+                                        <mat-form-field appearance="outline" class="mb-4">
+                                            <input matInput placeholder="Téléphone" formControlName="phone_number" name="phone_number">
+                                        </mat-form-field>
+                                       </div>
+                                   </div>
+                                   <div class="row">
+                                       <div class="col">
+                                        <button class="btn primary px-4 mr-3 mt-1" type="submit"> Enregistrer </button>
+                                       </div>
+                                   </div>                   
+                                </form>                      
+                             </div>
+                            </div>
+
+                        </div>
+
+
+                        
+                        <div class="col-5 company">
+                                                                                
+                            <div class="mollie">
+                                <div>
+                                    test
+                                </div>
+                            </div>
+                            <div class="mollie">
+                                
+                                <div>
+                                    <h3>Informations de la société</h3>  
+
+                                   <form  [formGroup]="companyForm" (ngSubmit)="companyFormSubmit()" >
+                                    <div class="row">
+                                        <div class="col">
+                                            <mat-label class="pl-3 mb-1 d-block">Nom de la société</mat-label>
+                                            <mat-form-field appearance="outline" class="mb-4">
+                                                <input matInput  formControlName="name" name="name">
+                                            </mat-form-field>                                       
+                                        </div>
+                                        <div class="col">
+                                            <mat-label class="pl-3 mb-1 d-block">Num. de TVA</mat-label>
+                                            <mat-form-field appearance="outline" class="mb-4">
+                                                <input matInput  formControlName="vat" name="vat">
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col">
+                                            <mat-label class="pl-3 mb-1 d-block">Adresse de facturation</mat-label>
+                                            <mat-form-field appearance="outline" class="mb-4 ">
+                                                <input matInput formControlName="Billing_address" name="Billing_address">
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col">
+                                            <mat-label class="pl-3 mb-1 d-block">Ville</mat-label>
+                                            <mat-form-field appearance="outline" class="mb-4">
+                                                <input matInput  formControlName="city" name="city">
+                                            </mat-form-field>                                       
+                                        </div>
+                                        <div class="col">
+                                            <mat-label class="pl-3 mb-1 d-block">Code postal</mat-label>
+                                            <mat-form-field appearance="outline" class="mb-4">
+                                                <input matInput  formControlName="postal_code" name="postal_code">
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col">
+                                            <mat-label class="pl-3 mb-1 d-block">E-mail</mat-label>
+                                            <mat-form-field appearance="outline" class="mb-4">
+                                                <input matInput  formControlName="email" name="email">
+                                            </mat-form-field>                                       
+                                        </div>
+                                        <div class="col">
+                                            <mat-label class="pl-3 mb-1 d-block">Téléphone</mat-label>
+                                            <mat-form-field appearance="outline" class="mb-4">
+                                                <input matInput  formControlName="phone_number" name="phone_number">
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="row">
+                                        <div class="col">
+                                         <button class="btn primary px-4 mr-3 mt-1" type="submit"> Enregistrer </button>
+                                        </div>
+                                    </div>  
+                                   </form>
+                                    
+                                </div>
+                            </div>             
+                                
+                                                  
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+    </section>    
+</ng-container>    

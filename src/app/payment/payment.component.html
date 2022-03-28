@@ -1,0 +1,190 @@
+<section class="mb-4">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12  px-4">
+                <div class="row positioForm">
+                    <div class="col-2 positioForm ">
+                        <img src="../../assets/img/social_media_picto/logo.svg" class="logoApp my-2" />
+                    </div>
+                    <div class="col-10">
+                        <app-search [receptions]="receptions" [receptionType]="receptionType"
+                            [(ngModel)]="receptionType">
+                        </app-search>
+                    </div>
+                </div>
+                <app-restaurant-details-header [restaurant]="cart.restaurant">
+                </app-restaurant-details-header>
+            </div>
+        </div>
+    </div>
+</section>
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-sm-6 ">
+                        <div class="row">
+                            <div class="col-12 pr-0 py-3">
+                                <h3 class="line">Récapitulatif</h3>
+                            </div>
+                            <div class="col-12 ">
+                                <table>
+                                    <tbody>
+                                        <tr class="py-5 my-5" *ngFor="let item of cart.items">
+                                            <td class="py-3" width="130px">
+                                                <div class="background-center-cover"
+                                                    style="background-image: url({{ProdImgUrl}}{{item.product.picture}})">
+                                                </div>
+                                            </td>
+                                            <td class="py-3" valign="top">
+                                                {{ item.product.name }}
+                                                <ul class="list-inline">
+                                                    <ng-container *ngFor="let annexe of item.annexe">
+                                                        <li *ngFor="let value of annexe.value">
+                                                            {{value.name}}
+                                                        </li>
+                                                    </ng-container>
+                                                </ul>
+                                            </td>
+                                            <td class="py-3" valign="right" valign="top">
+                                                <p>{{ item.price * item.quantity }} €</p>
+                                            </td>
+                                            <br>
+                                        </tr>
+                                        <!-- <p>Prix total:{{totalPrice(i)}}</p> -->
+                                    </tbody>
+
+                                </table>
+                            </div>
+                        </div>
+                        <div class="col-12 p-0">
+                            <button class="btn secondary" routerLink="/cart">modifier</button>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 ">
+                        <div class="row">
+                            <div class="col-12 pl-0 py-3">
+                                <h3 class="line">Informations personelles</h3>
+                            </div>
+                        </div>
+                        <!-- <pre>
+                            {{ contactForm.value | json }}
+                        </pre> -->
+                        <form [formGroup]="contactForm" class=" positioForm" (ngSubmit)="onContactFormSubmit()">
+                            <!-- Connected -->
+
+                            <ng-container *ngIf="isConnected; else noConnected">
+                                <div>
+                                    <div class=" py-1" *ngIf="receptionType==1">
+                                        <mat-form-field appearance="outline">
+                                            <mat-select formControlName="address_label" placeholder="adresse">
+                                                <mat-option *ngFor="let addressUser of addressList"
+                                                    [value]="addressUser.address">
+                                                    {{addressUser.label}}
+                                                </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+                                    <div class=" py-1 d-flex flex-column">
+                                        <p class="pb-1 pt-3">{{infoUser.first_name}} {{infoUser.last_name}}</p>
+                                        <p class="pb-4" *ngIf="receptionType==1; else recep">{{ addressOfUser()}}</p>
+                                        <p class="pb-4" *ngIf="receptionType==2"> {{infoUser.address}}</p>
+                                        <p class="pb-1">{{infoUser.email}}</p>
+                                        <p class="pb-4">{{infoUser.phone_number}}</p>
+                                    </div>
+                                </div>
+                            </ng-container>
+                            <!-- /*/////////-->
+                            <!-- not connectes-->
+                            <ng-template #noConnected>
+                                <div class="row">
+                                    <div class="col-6 py-1 pr-sm-2">
+                                        <mat-form-field appearance="outline">
+                                            <input matInput formControlName="first_name" placeholder="Nom">
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col-6 py-1 pl-sm-2">
+                                        <mat-form-field appearance="outline">
+                                            <input matInput formControlName="last_name" placeholder="Prénom">
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col-12 py-1">
+                                        <mat-form-field appearance="outline">
+                                            <input matInput formControlName="address" placeholder="Adresse">
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col-12 py-1">
+                                        <mat-form-field appearance="outline">
+                                            <mat-select formControlName="postal_code" placeholder="Code Postal">
+                                                <mat-option [value]="codeP" *ngFor="let codeP of postalCodesList">
+                                                    {{codeP.code}}
+                                                </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col-6 py-1 pr-sm-2">
+                                        <mat-form-field appearance="outline">
+                                            <input matInput formControlName="email" placeholder="Email">
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col-6 py-1 pl-sm-2">
+                                        <mat-form-field appearance="outline">
+                                            <input matInput formControlName="phone_number" placeholder="Téléphone">
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                            </ng-template>
+                            <!-- ////////////// -->
+
+                            <div class="pt-4" *ngIf="receptionType==1">
+                                <div class="border-bottom w-100 mx-0 pb-1 mb-4">
+                                    <h3>Choisissez le moment de livraison</h3>
+                                </div>
+                                <mat-form-field appearance="outline">
+                                    <mat-select formControlName="delivery_time"
+                                        placeholder="Choisissez le moment de livraison">
+                                        <mat-option [value]="list" *ngFor="let list of deliveryTimesList">{{list.name}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <div class="pt-4" *ngIf="receptionType==2">
+                                <div class="border-bottom w-100 mx-0 pb-1 mb-4">
+                                    <h3>Le retrait de votre commande se fera à l’adresse suivante</h3>
+                                </div>
+                                <div class="row px-0">
+                                    <div class="col-5 py-1 d-flex flex-column">
+                                        <p class="pb-1 pt-3">{{cart.restaurant.name}} </p>
+                                        <p class="pb-1">{{cart.restaurant.address}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pt-4">
+                                <div class="border-bottom w-100 mx-0 pb-1 mb-4">
+                                    <h3>Paiement</h3>
+                                </div>
+                                <mat-radio-group aria-label="Select an option" class="d-flex flex-column py-3"
+                                    formControlName="online_payment">
+                                    <mat-radio-button value="1">
+                                        En ligne
+                                        <img src="../../assets/img/social_media_picto/BanContact.svg" alt="">
+                                        <img src="../../assets/img/social_media_picto/masterCard.svg" alt="">
+                                        <img src="../../assets/img/social_media_picto/paypal.svg" alt="">
+                                    </mat-radio-button>
+                                    <mat-radio-button value="0">
+                                        En éspèces
+                                        <img src="../../assets/img/social_media_picto/espece.svg" alt="">
+                                    </mat-radio-button>
+                                </mat-radio-group>
+                            </div>
+                            <button class="btn primary" type="submit" (click)="setOrder()" routerLink="/orderStatut"
+                                [queryParams]="{type: type}">Commander</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<app-footer></app-footer>

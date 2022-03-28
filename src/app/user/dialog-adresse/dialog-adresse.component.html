@@ -1,0 +1,86 @@
+<div class="adresses">
+
+  <div class="close-btn-outer">
+    <mat-icon mat-button mat-dialog-close>
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M14 0C6.2 0 0 6.2 0 14C0 21.8 6.2 28 14 28C21.8 28 28 21.8 28 14C28 6.2 21.8 0 14 0ZM19.4 21L14 15.6L8.6 21L7 19.4L12.4 14L7 8.6L8.6 7L14 12.4L19.4 7L21 8.6L15.6 14L21 19.4L19.4 21Z"
+          fill="#423711" />
+      </svg>
+    </mat-icon>
+  </div>
+
+  <div class="py-4">
+
+    <form [formGroup]="addresseForm" (ngSubmit)="addressFormSubmit()">
+      <div class="pl-3">
+        <h4>Choisissez un pictogramme</h4>
+      </div>
+
+      <div class="pl-4">
+        <mat-radio-group formControlName="pictogram">
+          <mat-radio-button [value]="pict" *ngFor="let pict of pictogramsList" class="mr-5">
+            <img src="{{adUserImgUrl}}/{{pict.path }}" alt="">
+          </mat-radio-button>
+        </mat-radio-group>
+      </div>
+
+      <div class="pl-3">
+        <h4>Coordonnées</h4>
+      </div>
+      <div>
+        <div class="row pl-4">
+          <div class="col-6">
+
+            <mat-label class="pl-3 mb-1 d-block">Libellé</mat-label>
+            <mat-form-field appearance="outline" class="mb-3">
+              <input matInput formControlName="label" name="label" placeholder="Libellé">
+            </mat-form-field>
+            <mat-label class="pl-3 mb-1 d-block">Adresse</mat-label>
+            <mat-form-field appearance="outline" class="mb-3">
+              <input matInput formControlName="address" name="address" placeholder="Adresse">
+            </mat-form-field>
+            <mat-label class="pl-3 mb-1 d-block">Code postal</mat-label>
+            <mat-form-field appearance="outline" class="mb-3">
+              <input matInput formControlName="postal_code" name="postal_code" placeholder="Code postal">
+            </mat-form-field>
+            <mat-label class="pl-3 mb-1 d-block">Ville</mat-label>
+            <mat-form-field appearance="outline" class="mb-3">
+              <input matInput formControlName="city" name="city" placeholder="Ville">
+            </mat-form-field>
+            <div class="pl-3 mb-3 d-block">
+              <mat-checkbox class="mb-3" formControlName="default">
+                <span>
+                  Définir comme adresse par défaut
+                </span>
+              </mat-checkbox>
+            </div>
+       
+
+          </div>
+          
+          <div class="col-6">
+
+            <mat-label>A l’attention du livreur</mat-label>
+            <mat-form-field>
+              <textarea matInput matTextareaAutosize matAutosizeMinRows="7" matAutosizeMaxRows="5">
+             </textarea>
+            </mat-form-field>
+
+          </div>
+        </div>
+
+
+
+        <div class="pl-4">
+          <button class="btn-submit" type="submit"> Enregistrer </button>
+        </div>
+
+
+      </div>
+
+    </form>
+
+  </div>
+
+</div>

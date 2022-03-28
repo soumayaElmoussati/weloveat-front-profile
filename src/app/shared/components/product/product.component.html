@@ -1,0 +1,20 @@
+
+    <div class="products"  >
+        <div class="product_image background-center-cover mt-3 mb-2"
+            style="background-image: url({{restauImgUrl}}{{restaurant.cover_picture}})">
+            <div class="delivery" *ngIf="restaurant.free_delivery"> Livraison gratuite </div>
+      
+        </div>
+        <div class="d-flex">
+            <div class="mr-auto">
+                <h4>{{ restaurant.name }}</h4>
+                <p>{{ restaurant.delivery_time }}min</p>
+                <p>min.{{ restaurant.minimum_per_order }}€</p>
+            </div>
+            <ngb-rating class="rate " [rate]="restaurant.score" [readonly]="true" [max]=5></ngb-rating>
+            <p >({{restaurant.nbr_evaluation}})</p>
+        </div>    
+    </div>
+    
+
+

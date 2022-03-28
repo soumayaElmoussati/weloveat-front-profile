@@ -1,0 +1,244 @@
+<mat-sidenav-container class="example-container">
+
+    <mat-sidenav #sidemenu mode="over" position="end" class="right-menu">
+        <!-- user connecté /////////////////////////////////////(click)="goToLogin()"-->
+        <ng-template #noConnected>
+            <button type="submit" class="btn search 
+            mx-4 mt-5" (click)="goToLogin()">Se connecter</button>
+            <div class="restauImgMenu m-auto">
+                <h4>Téléchargez <br> l’application</h4>
+                <img class="appMobileMenu " src="../../assets/img/appMobile.png" />
+                <a><img class="downloadAppMenu " src="../../assets/img/downloadApp.png" /></a>
+                <a><img class="downloadApp2Menu " src="../../assets/img/downloadApp2.png" /></a>
+            </div>
+            <div class="ml-4 d-flex flex-column ">
+                <a href="">
+                    <p>A propos de weloveat</p>
+                </a>
+                <a href="">
+                    <p>Conditions d’utilisation</p>
+                </a>
+                <a href="">
+                    <p>Ajoutez votre restaurant</p>
+                </a>
+            </div>
+
+            <a href="" class="pos ml-4 mb-0">Besoin d’assistance?</a>
+        </ng-template>
+        <!-- user non connecte///////////////////////////////////////-->
+        <ng-container *ngIf="isConnected; else noConnected">
+            <!-- <button type="submit" class="btn search 
+            mx-4 mt-5" routerLink="/search">Se connecter</button>
+               <div class="restauImgMenu m-auto">
+                   <h4>Téléchargez <br> l’application</h4>
+                   <img class="appMobileMenu " src="../../assets/img/appMobile.png" />
+                   <a><img class="downloadAppMenu " src="../../assets/img/downloadApp.png" /></a>
+                   <a><img class="downloadApp2Menu " src="../../assets/img/downloadApp2.png" /></a>
+               </div>
+               <div class="ml-4 d-flex flex-column ">
+                   <a href="">
+                       <p>A propos de weloveat</p>
+                   </a>
+                   <a href="">
+                       <p>Conditions d’utilisation</p>
+                   </a>
+                   <a href="">
+                       <p>Ajoutez votre restaurant</p>
+                   </a>
+               </div>
+               <a href="" class="pos ml-4 mb-0">Besoin d’assistance?</a> -->
+
+
+
+            <div class="ml-4 d-flex flex-column ">
+                <img src="../../assets/img/user.png" class="imageAccount m-auto" alt="">
+                <span class="m-auto">Emmanuelle</span>
+                <a href="">
+                    <p>Mon compte</p>
+                </a>
+                <a href="">
+                    <p>Mes points de fidélité</p>
+                </a>
+                <a href="">
+                    <p>Mes favoris</p>
+                </a>
+                <a href="">
+                    <p>A propos de weloveat</p>
+                </a>
+                <a href="">
+                    <p>Conditions d’utilisation</p>
+                </a>
+                <a href="">
+                    <p>Ajoutez votre restaurant</p>
+                </a>
+            </div>
+            <div class="restauImgMenuCo ml-4">
+                <h4>Téléchargez <br> l’application</h4>
+                <img class="appMobileMenu " src="../../assets/img/appMobile.png" />
+                <a><img class="downloadAppMenu " src="../../assets/img/downloadApp.png" /></a>
+                <a><img class="downloadApp2Menu " src="../../assets/img/downloadApp2.png" /></a>
+            </div>
+            <a href="" class="pos ml-5 mb-0">Besoin d’assistance?</a>
+        </ng-container>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+        <!-- / <app-nav (menuStatusChanged)="menuStatusChange($event)"></app-nav> -->
+        <mat-sidenav-container fxFlexFill class="example-container">
+
+            <section class="takeAwayPic background-center-cover">
+                <!-- <button (click)="sidemenu.toggle()" class="buttton"> click on me </button> -->
+                <img (click)="sidemenu.toggle()" src="../../assets/img/menu-right.png"
+                    class="positionMenu cursor-pointer">
+                <img (click)="sidemenu.toggle()" src="../../assets/img/account.png"
+                    class="positionAccount cursor-pointer">
+                <div class="container text-center">
+                    <div class="row">
+                        <div class="col-12 text-center">
+                            <img src="../../assets/img/social_media_picto/Frame.png" class="d-block m-auto" />
+                            <img src="../../assets/img/social_media_picto/Vector.png" class="d-block m-auto py-4" />
+                            <h1 class="pb-5">
+                                Faites-vous livrer tout ce que vous aimez.
+
+                                {{ type }}
+
+                                {{ searchForm.value.date }}
+                                <!-- <ng-container *ngIf="isConnected; else noConnected"> user connected </ng-container>
+                                <ng-template #noConnected> user not connected </ng-template> -->
+
+                            </h1>
+                            {{ searchForm.value.date }}
+                            <form [formGroup]="searchForm" class="row pt-4 " (ngSubmit)="onSearchFormSubmit()">
+                                <mat-form-field appearance="outline" class=" col-8">
+                                    <mat-icon matPrefix><img src="../../assets/img/social_media_picto/adressIcon.png" />
+                                    </mat-icon>
+                                    <input matInput formControlName="address"
+                                        placeholder="Saisissez l’adresse de livraison">
+                                </mat-form-field>
+                                <mat-form-field class="example-full-width col-2" appearance="fill"
+                                    *ngIf="type=='reservation';else reception">
+                                    <mat-label>Date</mat-label>
+                                    <input matInput  formControlName="date" [matDatepicker]="picker">
+                                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                    <mat-datepicker [dateClass]="dateClass" #picker></mat-datepicker>
+                                </mat-form-field>
+                                <!-- <div class="reception mx-2" *ngIf="type=='reservation';">
+                                    <ul class="list-inline  reception_list ">
+                                        <li class="list-inline-item m-2">
+                                            <p>Heure</p>
+                                            <input mdc-datetime-picker="" date="false" time="true" type="text" id="time15"
+                                            placeholder="Time" minutes="true" minute-steps="15" min-date="minDate" auto-ok="true"
+                                            format="hh:mm a" short-time="true" ng-model="time" class=" md-input">
+                                        </li>
+                                    </ul>
+                                </div> -->
+                                <ng-template #reception>
+                                    <mat-form-field appearance="outline" class="col-2">
+                                        <mat-select [(value)]="selectedType" matNativeControl required
+                                            formControlName="type">
+                                            <mat-option *ngFor="let type of receptions" [value]="type.id"
+                                                (click)=" onReceptionTypeChange(type.id)">
+                                                {{type.name}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </ng-template>
+                                <button type="submit" class="btn search col-2 p-0" routerLink="/search"
+                                    [queryParams]="{type: type, data:searchForm.value}"> Rechercher
+                                </button>
+
+                            </form>
+                            <p class="mt-2"><u>Vous avez un compte? connectez-vous</u></p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section>
+                <ng-container *ngIf="type=='reservation'; else noReserve">
+                    <div class="mx-5">
+                        <div class="row py-5">
+                            <div class="col-12 py-5 ">
+                                <h2 class="mb-5">Restaurants populaires</h2>
+                                <div class="List-category my-5" *ngFor="let category of popularRestaurantList; let i = index">
+                                    <img class="restau-img" src="{{restauImgUrl}}{{category.logo }}" />
+                                    <div class="title-icon d-flex justify-content-between mx-4">
+                                        <div class="categ-title mt-3">
+                                            <h4>{{ category.name }} </h4>
+                                        </div>
+                                        <mat-icon matSuffix><img class="category-icon mt-3"
+                                                src="../../assets/img/social_media_picto/icons_arrow-left.svg" />
+                                        </mat-icon>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
+                <ng-template #noReserve>
+                    <div class="mx-5">
+                        <div class="row py-5">
+                            <div class="col-12 py-5 ">
+                                <h2 class="mb-5">Catégories populaires</h2>
+                                <div class="List-category my-5" *ngFor="let category of categoryList; let i = index">
+                                    <div class="categ-circle "></div>
+                                    <img class="categ-img " src="{{catRestauImgUrl}}{{category.cover }}" />
+                                    <div class="title-icon d-flex justify-content-between mx-4">
+                                        <div class="categ-title">
+                                            <h5>{{i+1 | number : '2.0-0'}}</h5>
+                                            <h4>{{ category.name }} </h4>
+                                        </div>
+                                        <mat-icon matSuffix><img class="category-icon mt-3"
+                                                src="../../assets/img/social_media_picto/icons_arrow-left.svg" />
+                                        </mat-icon>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </ng-template>
+            
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-8 p-0 pb-4">
+                            <img class="categ-img1-insc" src="../../assets/img/backgAddRestau.png" />
+                            <div class="categ-img-insc background-center-cover">
+                                <h2>Ajoutez votre restaurant</h2>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing <br> elit. Nec semper in amet mi
+                                    velit vitae.
+                                </p>
+                                <button class="btn  primary inscription">M'inscrire</button>
+                            </div>
+                        </div>
+                        <div class="col-2 restauImg ">
+                            <p>Téléchargez <br> l’application</p>
+                            <img class="appMobile " src="../../assets/img/appMobile.png" />
+                            <a><img class="downloadApp " src="../../assets/img/downloadApp.png" /></a>
+                            <a><img class="downloadApp2 " src="../../assets/img/downloadApp2.png" /></a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <app-footer></app-footer>
+        </mat-sidenav-container>
+    </mat-sidenav-content>
+</mat-sidenav-container>
+<!-- 
+        <app-nav (menuStatusChanged)="menuStatusChange($event)"></app-nav>
+        <mat-sidenav-container fxFlexFill class="example-container">
+
+            <mat-sidenav color="primary" #sidenav fxLayout="column" mode="over" opened="false" fxHide.gt-sm="true">
+                <div fxLayout="column" *ngIf="false">
+                    <a mat-button routerLink="/about-us">About us</a>
+                    <a mat-button routerLink="/prices">Prices</a>
+                    <a mat-button routerLink="/start-page">Start page</a>
+                    <a mat-button routerLink="/offer">Offer</a>
+                    <a mat-button routerLink="/contact">Contact</a>
+                </div>
+            </mat-sidenav>
+            <mat-sidenav-content fxFlexFill>
+                <div class="gray-background-color main">
+                    <router-outlet></router-outlet>    
+                </div>
+                <app-footer></app-footer>
+            </mat-sidenav-content>
+        </mat-sidenav-container> -->

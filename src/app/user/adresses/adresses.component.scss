@@ -1,0 +1,45 @@
+
+
+.adresse_box1{
+    border: 2px dashed #58C6FA;
+    box-sizing: border-box;
+    filter: drop-shadow(4px 9px 65px #D3E1E8);
+    border-radius: 25px;
+   // width: 342px;
+    height: 100%;
+    padding: 27px 30px;
+  
+}
+
+.adresse_box2{
+   // width: 342px;
+    height: 100%;
+    background: #FFFFFF;
+    border-radius: 25px;
+    box-shadow: 4px 9px 65px #D3E1E8;
+    border-radius: 25px;
+   // padding: 27px 30px;
+    .default{
+   
+        border-radius: 5px;
+        background: linear-gradient(90deg, #D9F4D2 0%, #58C6FA 100%);
+        font-style: italic;
+        font-family: Poppins;
+        font-weight: 600;
+        font-size: 13px;
+        position: absolute;
+        color: #FFFFFF;
+        padding: 2px 13px;
+
+    }
+
+
+}
+    .close_address{
+
+        position: absolute;               
+        top: 15px;
+        right: 10px;
+        cursor: pointer;
+
+    }

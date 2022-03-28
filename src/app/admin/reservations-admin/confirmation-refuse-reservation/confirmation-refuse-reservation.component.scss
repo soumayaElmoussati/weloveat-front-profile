@@ -1,0 +1,42 @@
+.confirmation{
+   
+    border-radius: 25px;
+    .h2{
+        
+        font-family: Coolvetica;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 24px;
+        line-height: 29px;
+        color: #5A5A5A;
+        text-align: center;
+    }
+}
+
+.btn-confirm{
+    width: 122px;
+    height: 48px;
+    border-radius: 5px;
+    background: #5A5A5A;
+    text-align: center;
+    color: #FFFFFF;
+    font-family: Poppins;
+    font-weight: normal;
+    font-size: 13px;
+    font-style: normal;
+}
+
+
+.close-btn-outer {
+    position: relative;
+    float: right;
+}
+
+::ng-deep .mat-dialog-container{
+    border-radius: 30px !important;
+}
+
+.close-btn-outer {
+    position: relative;
+    float: right;
+  }

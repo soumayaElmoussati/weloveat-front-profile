@@ -1,0 +1,55 @@
+
+// .menuImg{
+//      border-radius: 0px 5px 5px 0px;
+//      border: 1px solid #DEDEDE;
+//      .background-center-cover{
+//         border-radius: 0px 4px 4px 0px;
+//      }
+// }
+.menu{
+    border-radius: 5px;
+   border: 1px solid #DEDEDE;
+   p{
+    font-family: 'Poppins' !important;
+    font-size: 13px !important;
+    color: #BFC7CC;
+   }
+}
+.menu-image{
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+}
+.menuScroll{
+    position: sticky;
+    top: 0px;
+    background-color: white;
+    z-index: 99;
+    ul{
+        border-bottom: 1px solid #DEDEDE;
+        li{
+            a{
+                padding: 32px 15px 5px 15px;
+                display: inline-block;
+                font-size: 14px;
+                position: relative;
+                color:  #5A5A5A !important;
+                &.active:after, &:hover:after{
+                    content: '';
+                    background-color: #58C6FA;
+                    height: 5px;
+                    width: 100%;
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+
+                }
+            }
+        }
+    }
+}
+.logoApp{
+    width: 150px;
+      height: 55px;
+  }
+ 

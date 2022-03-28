@@ -1,0 +1,48 @@
+.product_pic{
+    width: 133px;
+    height: 128px;
+}
+
+.card-categorie{
+    background: #FFFFFF;
+    border: 1px solid #DEDEDE;
+    box-sizing: border-box;
+    border-radius: 5px;
+    width: 250px;
+}
+
+.btn-submit{
+    width: 181px;
+    height: 48px;
+    background: #5A5A5A;
+    border-radius: 5px;
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 13px;
+    text-align: center;
+    color: #FFFFFF;
+}
+
+.annexe{
+    border: 1px solid #DADADA;
+    box-sizing: border-box;
+    border-radius: 12px;
+    .a{
+         font-family: 'Poppins';
+         font-style: normal;
+         font-weight: 500;
+         font-size: 12px;
+         display: flex;
+         align-items: center;
+         text-align: center;
+         letter-spacing: 0.13px;
+         color: #86BB25;
+    }
+}
+.close_prod{
+    position: absolute;               
+    top: 8px;
+    right: 25px;
+    cursor: pointer;
+}

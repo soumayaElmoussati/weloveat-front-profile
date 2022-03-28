@@ -1,0 +1,25 @@
+<div class="position-relative">
+    <a routerLink="/{{restaurant.slug}}" [queryParams]="{type: type}" class="restaurants">
+        <div class="product_image background-center-cover mt-3 mb-2"
+            style="background-image: url({{restauImgUrl}}{{restaurant.cover_picture}})">
+            <div class="delivery" *ngIf="restaurant.free_delivery"> Livraison gratuite </div>
+
+        </div>
+        <div class="d-flex">
+            <div class="mr-auto">
+                <h3>{{ restaurant.name }}</h3>
+                <p>{{ restaurant.delivery_time }} min</p>
+                <p>min.{{ restaurant.minimum_per_order }}€</p>
+            </div>
+            <ngb-rating class="rate " [rate]="restaurant.score" [readonly]="true" [max]=5></ngb-rating>
+            <p>({{restaurant.nbr_evaluation}})</p>
+        </div>
+    </a>
+    <a class="favoris" (click)="addFavoris()">
+        <svg width="23" height="21" viewBox="0 0 23 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+                d="M22.3369 4.47873C21.9835 3.66039 21.4739 2.91882 20.8366 2.29553C20.1989 1.67038 19.447 1.17358 18.6218 0.832147C17.7661 0.4767 16.8483 0.294761 15.9218 0.296894C14.6219 0.296894 13.3536 0.65285 12.2515 1.32521C11.9878 1.48605 11.7373 1.66271 11.5 1.85519C11.2627 1.66271 11.0122 1.48605 10.7485 1.32521C9.64639 0.65285 8.37812 0.296894 7.07822 0.296894C6.14219 0.296894 5.23516 0.47619 4.37822 0.832147C3.55029 1.17492 2.8041 1.66799 2.16338 2.29553C1.52528 2.91811 1.01556 3.65986 0.663086 4.47873C0.296582 5.33039 0.109375 6.23478 0.109375 7.16554C0.109375 8.04357 0.288672 8.95851 0.644629 9.88927C0.942578 10.6671 1.36973 11.4739 1.91553 12.2887C2.78037 13.578 3.96953 14.9228 5.44609 16.286C7.89297 18.5456 10.3161 20.1066 10.4189 20.1698L11.0438 20.5706C11.3207 20.7473 11.6767 20.7473 11.9535 20.5706L12.5784 20.1698C12.6813 20.1039 15.1018 18.5456 17.5513 16.286C19.0278 14.9228 20.217 13.578 21.0818 12.2887C21.6276 11.4739 22.0574 10.6671 22.3527 9.88927C22.7087 8.95851 22.888 8.04357 22.888 7.16554C22.8906 6.23478 22.7034 5.33039 22.3369 4.47873Z"
+                fill="white" />
+        </svg>
+    </a>
+</div>

@@ -1,0 +1,39 @@
+<section class="takeAwayPic background-center-cover">
+    <div class="container ">
+        <div class="row">
+            <div class="col-12 d-flex justify-content-center align-items-center flex-column">
+                <ng-container *ngIf="paymentStatus; else paymentError">
+                    <img src="../../assets/img/social_media_picto/Vector.png" />
+                    <div class="success d-flex justify-content-center align-items-center flex-column py-4 my-4">
+                        <img src="../../assets/img/social_media_picto/shapes.svg" />
+                        <div class="icons">
+                            <img src="../../assets/img/social_media_picto/successIcon.svg" />
+                        </div>
+                        <h1 class="py-4">Merci pour votre commande!</h1>
+                        <h2>Elle sera chez vous dans</h2>
+                        <h2 class="text-center">45</h2>
+                        <h2 class="text-center pb-4">min</h2>
+                        <p>Une confirmation de commande vous a été envoyée par mail. <br>Vous serez notifié par mail aux
+                            différentes étapes de la commande. <br>Si besoin, contactez le vendeur au 0032 486 82 01 21
+                        </p>
+                        <p> Numéro de commande: 856BH45 </p>
+                        <p>Adresse de livraison: Rue de la Solidarité 33, 1070 Anderlecht<br>
+                            Moyen de paiement choisi: Espèces 49,65€</p>
+                    </div>
+                </ng-container>
+                <ng-template #paymentError>
+                    <img src="../../assets/img/social_media_picto/Vector.png" />
+                    <div class="error d-flex justify-content-center align-items-center flex-column py-4 my-4">
+                        <img src="../../assets/img/social_media_picto/errorIcon.svg" />
+
+                        <h1 class="py-4">Oops! Une erreur est <br> survenue.</h1>
+
+                        <p class="pb-5 pt-2"><u>Veuillez réessayer</u></p>
+                        <button class="btn errors mt-5 mb-2 ">Réessayer</button>
+                    </div>
+                </ng-template>
+            </div>
+        </div>
+    </div>
+</section>
+<app-footer></app-footer>

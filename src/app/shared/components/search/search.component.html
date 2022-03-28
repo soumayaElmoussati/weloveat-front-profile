@@ -1,0 +1,46 @@
+<div class="row py-3">
+    <div class="col  d-flex justify-content-end">
+        <div class="reception mx-2" *ngIf="type=='reservation';else reception">
+            <ul class="list-inline  reception_list ">
+                <li class="list-inline-item m-2">
+                    <p>Date</p>
+                </li>
+            </ul>
+        </div>
+
+        <div class="reception mx-2" *ngIf="type=='reservation';">
+            <ul class="list-inline  reception_list ">
+                <li class="list-inline-item m-2">
+                    <p>Heure</p>
+                </li>
+            </ul>
+        </div>
+        <ng-template #reception>
+            <div class="reception mx-2">
+                <ul class="list-inline  reception_list ">
+                    <li class="list-inline-item m-2" *ngFor="let recep of receptions"
+                        [ngClass]="{'active': receptionType==recep.id }" (click)="onReceptionTypeChange(recep.id)"
+                        [value]="recep">
+                        <p>{{ recep.name }}</p>
+                    </li>
+                </ul>
+            </div>
+        </ng-template>
+        <form [formGroup]="searchForm" class=" addressBtn mx-2">
+            <mat-form-field appearance="outline" class="address ">
+                <mat-icon matPrefix><img src="../../assets/img/social_media_picto/adressIcon.png" />
+                </mat-icon>
+                <input matInput formControlName="address" placeholder=" Rue Saint-Denis 284, 1190 Forest">
+            </mat-form-field>
+        </form>
+        <form [formGroup]="searchForm" class="searchBtn mx-2">
+            <mat-form-field appearance="outline" class=" ">
+                <mat-icon matPrefix><img src="../../assets/img/social_media_picto/searchIcon.svg" />
+                </mat-icon>
+                <input matInput formControlName="type" placeholder=" Rechercher un restaurant">
+            </mat-form-field>
+        </form>
+        <app-order></app-order>
+
+    </div>
+</div>
