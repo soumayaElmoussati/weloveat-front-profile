@@ -1,1 +1,127 @@
-<p>dashboard works!</p>
+<ng-container *transloco="let t">
+    <section class="admin-dashboard" #adminDashboard>
+        <div class="container-fluid h-100">
+            <div class="row h-100">
+                <div class="col-12 px-0">
+
+                    <div class=" products ">
+                        <div class="product_image background-center-cover "
+                            style="background-image: url({{restauImgUrl}}{{establishment?.cover_picture}})">
+                         
+                            <div class="delivery pl-4">
+                              
+                                    <img src="{{restauImgUrl}}{{establishment?.logo}}" class="logo mb-2 mt-4" >
+                             
+                                <div class="d-flex ">
+                                    <h1> {{ establishment?.name }} </h1>
+                                </div>
+                                <p class="">{{establishment?.address}} </p>
+                                <ngb-rating class="rate" [rate]="establishment?.score" [readonly]="true" [max]=5>
+                                </ngb-rating>    
+                                
+                              
+                            </div>
+                            <div class="box_edit">
+                                <input type="file" name="" #coverImage id="" (change)="onEditCoverPicture($event)" class="d-none">
+                                <a (click)="coverImage.click()">
+                                   <svg width="21" height="18" viewBox="0 0 21 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                     <path d="M10.7273 13C12.3841 13 13.7273 11.6569 13.7273 10C13.7273 8.34315 12.3841 7 10.7273 7C9.07044 7 7.72729 8.34315 7.72729 10C7.72729 11.6569 9.07044 13 10.7273 13Z" fill="#5A5A5A"/>
+                                     <path d="M18.7273 2H15.5573L14.3173 0.65C14.1309 0.445393 13.904 0.281907 13.6508 0.169986C13.3977 0.0580653 13.124 0.00017027 12.8473 0H8.6073C8.0473 0 7.50729 0.24 7.12729 0.65L5.89729 2H2.72729C1.62729 2 0.727295 2.9 0.727295 4V16C0.727295 17.1 1.62729 18 2.72729 18H18.7273C19.8273 18 20.7273 17.1 20.7273 16V4C20.7273 2.9 19.8273 2 18.7273 2ZM10.7273 15C7.96729 15 5.72729 12.76 5.72729 10C5.72729 7.24 7.96729 5 10.7273 5C13.4873 5 15.7273 7.24 15.7273 10C15.7273 12.76 13.4873 15 10.7273 15Z" fill="#5A5A5A"/>
+                                   </svg>                                    
+                                </a>
+                            </div>
+                         
+                        </div>
+                    </div>
+
+
+            
+                    
+                    <div style="height: 75%; display: flex;" >
+                        <div class="orders" >
+                            <div class="mollie">
+                                <ul class="list-inline statistics">
+                                    <li class="">
+                          
+                                        <button class="btn-details mb-0" routerLink="/admin/orders">Voir tout</button>     
+                                       
+                                    </li>
+                                    <li>
+                                        <span>{{ statisticsData.nbrPendingOrders }}</span>
+                                        <div class="li-2">
+                                            <p>Commande(s) en cours</p>
+                                        </div>
+                                        <div class="mt-2">
+                                            <button class="btn-details" routerLink="/admin/orders">Voir tout</button>
+                                        </div>
+                                        
+                                    </li>
+                                    <li class="">
+                                        <span>{{ statisticsData.nbrDeliveredOrders }}</span>
+                                        <div class="li-3">
+                                            <p>Commande(s) livrée(s)</p>
+                                        </div>
+                                        <div class="mt-2">
+                                           <button class="btn-details" routerLink="/admin/orders">Voir tout</button> 
+                                        </div>
+                                        
+                                    </li>
+
+                                </ul>
+                            </div>
+                            <div class="chart">
+                                <div>
+                                    <h4> Réservations d’aujourd’hui </h4>
+                                     <ul class="list-inline">
+                                         <li class="">
+                                          <p> {{ statisticsData.nbrReservationRequests }}</p> 
+                                         </li>
+                                       
+                                         
+
+                                         <li class="">
+                                           <p>{{ statisticsData.personsNbr }}</p> 
+                                        </li>
+
+
+                                     </ul>
+                                 
+                                    
+                                 
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="ventes mt-4" >
+                            <div class="chart">
+                                <div>
+                                    <h4>
+                                        Ventes
+                                        <div class="d-flex">
+                                            <button class="btn mr-2" [ngClass]=" {'active' : filtre.value == 'day' } " (click)="filtre.setValue('day')" > J </button>
+                                            <button class="btn mr-2" [ngClass]=" {'active' : filtre.value == 'month' } " (click)="filtre.setValue('month')" > M </button>
+                                            <button class="btn" [ngClass]=" {'active' : filtre.value == 'year' } " (click)="filtre.setValue('year')" > A </button>
+                                        </div>
+                                    </h4>
+                                        <canvas baseChart height="100vh"
+                                           [datasets]="barChartData"
+                                           [labels]="barChartLabels"
+                                           [options]="barChartOptions"
+                                           [legend]="barChartLegend"
+                                           [chartType]="barChartType">
+                                       </canvas>   
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </section>
+</ng-container>

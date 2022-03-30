@@ -77,24 +77,31 @@
                                                 <div class="col" >
                                                     <div *ngFor="let open of establishmentDetail?.opening_times">
                                                         <div class="col-sm-12 d-flex justify-content-start align-items-start mb-1">
-                                                            <span class="agenda mr-3"><p>{{ open.day }}</p></span>
-                                                            <span class="time_badge mr-3"><p>{{ open.morning_start_time }}</p></span> 
-                                                            <p class="py-2 mr-2">-</p> <span class="time_badge mr-2"><p>{{ open.morning_end_time }}</p></span>
-                                                            <span class="time_badge mr-3"><p>{{ open.evening_start_time }}</p></span> 
-                                                            <p class="py-2 mr-2">-</p> <span class="time_badge mr-2"><p>{{ open.evening_end_time }}</p></span>
-                                                         
-                                                            <a class="mr-3 py-2">
+                                                            
+                                                            <ng-container *ngIf="open.morning_start_time!=null">
+                                                                <span class="agenda mr-3"><p>{{ open.day }}</p></span>
+                                                                <span class="time_badge mr-3"><p>{{ open.morning_start_time }}</p></span> 
+                                                                <p class="py-2 mr-2">-</p> <span class="time_badge mr-2"><p>{{ open.morning_end_time }}</p></span>
+                                                                <span class="time_badge mr-3"><p>{{ open.evening_start_time }}</p></span> 
+                                                                <p class="py-2 mr-2">-</p> <span class="time_badge mr-2"><p>{{ open.evening_end_time }}</p></span>
+                                                                <a class="mr-3 py-2">
+                                                                    <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                        <rect width="25" height="25" rx="4" transform="matrix(-1 0 0 1 25 0)" fill="#F6F6F6"/>
+                                                                        <path d="M13.5 9V16M10 12.5H17" stroke="#5F5F5F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                                    </svg>                                                                    
+                                                                </a>                            
+                                                                <a class="py-2">
                                                                 <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                    <rect width="25" height="25" rx="4" transform="matrix(-1 0 0 1 25 0)" fill="#F6F6F6"/>
-                                                                    <path d="M13.5 9V16M10 12.5H17" stroke="#5F5F5F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                                </svg>                                                                    
-                                                            </a>                            
-                                                            <a class="py-2">
-                                                            <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                <rect width="25" height="25" rx="4" transform="matrix(-1 0 0 1 25 0)" fill="#ED3024"/>
-                                                                <path d="M16 10L10 16M10 10L16 16" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                            </svg>
-                                                         </a>
+                                                                    <rect width="25" height="25" rx="4" transform="matrix(-1 0 0 1 25 0)" fill="#ED3024"/>
+                                                                    <path d="M16 10L10 16M10 10L16 16" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                                </svg>
+                                                             </a>
+                                                            </ng-container>
+                                                            <ng-container *ngIf="open.morning_start_time==null">
+                                                                <span class="agenda-free mr-3"><p>{{ open.day }}</p></span>
+                                                                <p class="py-2 mr-2">Fermé</p>
+                                                            </ng-container>
+                                                       
                                                         </div>                      
                                                     </div>
                                     
@@ -112,7 +119,7 @@
                               </div>
                             </div>
 
-                            <div class="mollie">                           
+                            <div class="zone_delivery">                           
                                 <div>                                  
                                     <h3>Tarifs de livraison par commune</h3>  
                                     <div class="d-flex justify-content-start align-items-center pl-3">
@@ -123,16 +130,17 @@
                                             </svg>
                                          </a>                                           
                                     </div>
-
-                                    <div class="row">
-                                        <div class="col">
-                                            <div *ngFor="let delivery_zone of establishmentDetail?.delivery_zones">
+                            
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="zone_delivery_list">
+                                            <div *ngFor="let delivery_zone of deliveryZonesList">
                                                 <div class="d-flex justify-content-start align-items-center pl-3">
                                                     <span class="badge_geographic_name mr-3"><p>{{ delivery_zone.geographic_name }}</p></span>
                                                     <span class="badge_delivery_zone mr-3"><p>coût: {{delivery_zone.shipping_cost}}€</p></span>
                                                     <span class="badge_delivery_zone mr-3"><p>{{delivery_zone.delivery_time}} min</p></span>
                                                     <span class="badge_delivery_zone mr-3"><p>àpd {{delivery_zone.minimum_per_order}} €</p></span>
-
+    
                                                   <a class="py-2" (click)="deleteZoneDelivery(delivery_zone)" >
                                                         <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                             <rect width="25" height="25" rx="4" transform="matrix(-1 0 0 1 25 0)" fill="#ED3024"/>
@@ -140,10 +148,13 @@
                                                         </svg>                                                                  
                                                     </a>
                                                 </div> 
-
-                                            </div>                                           
+                                            </div> 
                                         </div>
+                                                                              
                                     </div>
+                                </div>
+                              
+                            
                                                                                
                                </div>
                             </div>
@@ -174,15 +185,23 @@
                                      <div *ngFor="let rec of receptionTypeList">
 
                                         <div class="d-flex justify-content-start align-items-center" >
-                                            <div class="establishment_badge mr-3 mb-2">
+                                            <div class="establishment_badge mr-3 mb-3">
                                               <img src="../assets/img/{{rec.name}}.svg" alt="">                                             
-                                              </div>                            
+                                              </div>                                                    
+                                              <mat-radio-group >
+                                                  <ng-container  *ngIf="rec.name == 'OWN_DELIVERERS' "> 
+                                                    <mat-radio-button [value]="rec" ><p>Je possède mes propres livreurs</p> Commission de 9,9% </mat-radio-button>  
+                                                  </ng-container>
+                                                  <ng-container  *ngIf="rec.name == 'PARTNER_DELIVERERS' "> 
+                                                    <mat-radio-button [value]="rec" > <p>Je n’ai pas de livreurs, mais je veux livrer grâce aux livreurs partenaires weloveat</p> Commission de 24,9% </mat-radio-button>  
+                                                 </ng-container>
+                                                 <ng-container  *ngIf="rec.name == 'NO_DELIVERY' "> 
+                                                    <mat-radio-button [value]="rec" > <p>Je n’ai pas de livreurs et je ne veux pas livrer, toutes les commandes sont à emporter</p> Commission de 9,9% </mat-radio-button>  
+                                                 </ng-container>
+                                                                                 
+                                            </mat-radio-group>
                                          </div>
-                                         
 
-                                         <mat-radio-group >
-                                            <mat-radio-button [value]="rec" >{{rec.name}}</mat-radio-button>                                       
-                                        </mat-radio-group>
                                       </div>
                                  
                             
@@ -191,15 +210,63 @@
                            
                               </div>
                             </div>
-                            <div class="mollie">
-                                
-                                <div>
-                                    <h3>Informations de la société</h3>  
+                            <div class="mollie">                           
+                                <div>                                  
+                                    <h3>Heures de livraison</h3>  
+                                    <div>              
+                                        <form  [formGroup]="livraisonOuvertureForm">
 
-    
+                                            <div class="row">
+                                                <div class="col">
+                                                    Mêmes horaires tous les jours 
+                                                </div>
+                                            </div>
+
+                                            <div class="row py-2">
+                                                <div class="col" >
+                                                    <div *ngFor="let del of establishmentDetail?.delivery_schedules">
+                                                        <div class="col-sm-12 d-flex justify-content-start align-items-start mb-1">
+                                                          <ng-container *ngIf="del.morning_start_time!=null">
+                                                            <span class="agenda mr-3"><p>{{ del.day }}</p></span>
+                                                            <span class="time_badge mr-3"><p>{{ del.morning_start_time }}</p></span> 
+                                                            <p class="py-2 mr-2">-</p> <span class="time_badge mr-2"><p>{{ del.morning_end_time }}</p></span>
+                                                            <span class="time_badge mr-3"><p>{{ del.evening_start_time }}</p></span> 
+                                                            <p class="py-2 mr-2">-</p> <span class="time_badge mr-2"><p>{{ del.evening_end_time }}</p></span>
+                                                         
+                                                            <a class="mr-3 py-2">
+                                                                <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                    <rect width="25" height="25" rx="4" transform="matrix(-1 0 0 1 25 0)" fill="#F6F6F6"/>
+                                                                    <path d="M13.5 9V16M10 12.5H17" stroke="#5F5F5F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                                </svg>                                                                    
+                                                            </a>                            
+                                                            <a class="py-2">
+                                                            <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                <rect width="25" height="25" rx="4" transform="matrix(-1 0 0 1 25 0)" fill="#ED3024"/>
+                                                                <path d="M16 10L10 16M10 10L16 16" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                            </svg>
+                                                         </a>
+                                                        </ng-container>
+                                                        <ng-container *ngIf="del.morning_start_time==null">
+                                                            <span class="agenda-free mr-3"><p>{{ del.day }}</p></span>
+                                                            <p class="py-2 mr-2">Fermé</p>
+                                                        </ng-container>
+                                                        
+                                                        </div>                      
+                                                    </div>
                                     
-                                </div>
-                            </div>             
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col">
+                                                  <a class="save-modification"> Enregistrer les modifications </a>
+                                                </div>
+                                            </div>  
+
+                                        </form>                                                                              
+                                    </div>               
+                              </div>
+                            </div>            
                                 
                                                   
                         </div>

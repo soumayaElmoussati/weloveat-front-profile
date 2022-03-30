@@ -28,6 +28,17 @@ export class AddNewProductAdditionalComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+    if(this.data){
+      this.categoryAdditionalForm.get('id').setValue(this.data.id);
+      this.categoryAdditionalForm.get('name').setValue(this.data.name);
+      this.categoryAdditionalForm.get('multi_select').setValue(this.data.multi_select);
+  //    this.categoryAdditionalForm.get('products').setValue(this.data.products);
+      this.categoryAdditionalForm.get('products').setValue([
+        { name: this.data.name },
+        { price: this.data.price}	
+      ]);
+    }
   }
 
   products() : FormArray {
@@ -50,11 +61,18 @@ export class AddNewProductAdditionalComponent implements OnInit {
 
   onSubmit(){
     if (this.categoryAdditionalForm.valid) {
+      if(this.categoryAdditionalForm.value.id){
+          this.productAdminS.updateProductAdditionalCategories(this.categoryAdditionalForm.value).subscribe((res:any) => {
+            this.dialogRef.close(res.data);
+          } )
+      }else{
+        console.log(this.categoryAdditionalForm.value);
+        this.productAdminS.addCategoryAdditional(this.categoryAdditionalForm.value).subscribe((res: any) => {
+          this.dialogRef.close(res.data);
+        })
+      }
 
-      console.log(this.categoryAdditionalForm.value);
-      this.productAdminS.addCategoryAdditional(this.categoryAdditionalForm.value).subscribe((res: any) => {
-        this.dialogRef.close(res.data);
-      })
+     
     }
   }
 //

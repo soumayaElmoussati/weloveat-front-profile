@@ -45,5 +45,13 @@ export class AdminEstablishmentService {
     return this.http.get(this.apiUrl+'establishments/getAllTimeUnits');
   } 
 
+  updateDeliverySchedule(data){
+    return this.http.put(this.apiUrl+'deliverySchedules/editDeliverySchedules', data);
+  }
+
+  updateOpeningTimes(data){
+    return this.http.put(this.apiUrl+'openingTimes/editOpeningTimes', data);
+  }
+
 
 }

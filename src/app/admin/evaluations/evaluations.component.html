@@ -1,49 +1,49 @@
 <ng-container *transloco="let t">
-    <section class="evaluations-panel">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-12">
+  <section class="evaluations-panel">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
 
-            <div  class="row h-100">
-                <div class="col-md-8 evaluations" >
-                    <div>
-                       
-                    <div  class="evaluations_list" >                             
-                         <div class="pl-3 py-4" *ngFor="let eval of evaluationList">
-                          <div>
-                            <ngb-rating class="rate" [rate]="eval.score" [readonly]="true" [max]=5></ngb-rating>
-                          </div>
-                          <div>
-                            <p>Déposé par:</p> {{eval.evaluator_name}} 
-                          </div>
-                          <div class="col-sm-12 d-flex justify-content-start align-items-start ">
-                           <img src="{{UserImgUrl}}/{{eval.evaluator_picture}}" alt="" class="user-pic">
-                           <p>{{eval.comment}}</p>                      
-                          </div>
+          <div  class="row h-100">
+              <div class="col-md-8 evaluations" >
+                  <div>
+                     
+                  <div  class="evaluations_list" >                             
+                       <div class="pl-3 py-4" *ngFor="let eval of evaluationList">
+                        <div>
+                          <ngb-rating class="rate" [rate]="eval.score" [readonly]="true" [max]=5></ngb-rating>
+                        </div>
+                        <div>
+                          <p>Déposé par:</p> {{eval.evaluator_name}} 
+                        </div>
+                        <div class="col-sm-12 d-flex justify-content-start align-items-start ">
+                         <img src="{{UserImgUrl}}/{{eval.evaluator_picture}}" alt="" class="user-pic">
+                         <p>{{eval.comment}}</p>                      
+                        </div>
 
-                         </div> 
-                      </div>                    
-                    </div>
-                </div>
-    
-                <div class="col-md-4 rates">
-                    <div>
-                        <h2> Mes évaluations </h2>
-                        <div class="d-flex justify-content-center align-items-center">
-                           <p>Les utilisateurs vous ont attribué la note moyenne de:</p>
-                        </div>
-                        <div class="d-flex justify-content-center align-items-center">
-                            <ngb-rating class="rate " [rate]="" [readonly]="true" [max]=5></ngb-rating>
-                        </div>
-                        <div class="d-flex justify-content-center align-items-center">
-                         <p></p>
+                       </div> 
+                    </div>                    
+                  </div>
+              </div>
+  
+              <div class="col-md-4 rates">
+                  <div>
+                      <h2> Mes évaluations </h2>
+                      <div class="d-flex justify-content-center align-items-center">
+                         <p>Les utilisateurs vous ont attribué la note moyenne de:</p>
                       </div>
+                      <div class="d-flex justify-content-center align-items-center">
+                          <ngb-rating class="rate " [rate]="" [readonly]="true" [max]=5></ngb-rating>
+                      </div>
+                      <div class="d-flex justify-content-center align-items-center">
+                       <p></p>
                     </div>
-                </div>
-            </div>
+                  </div>
+              </div>
           </div>
-         
         </div>
+       
       </div>
-    </section>
-  </ng-container>
+    </div>
+  </section>
+</ng-container>

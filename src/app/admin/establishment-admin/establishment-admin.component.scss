@@ -54,22 +54,6 @@
   
     
 
-    .note{
-
-        height: 100%;
-        padding-right: 10px;
-        .mollie{
-            height: 40%;
-            padding: 20px 0px;
-            & > div{
-                background-color: #FFFFFF;
-                border-radius: 27px;
-                height: 100%;
-                padding: 27px 30px;              
-            }
-        }      
-    }
-
     .comptes{
 
         height: 100%;
@@ -81,9 +65,24 @@
                 background-color: #FFFFFF;
                 border-radius: 27px;
                 height: 100%;
-                padding: 27px 30px;              
+                padding: 27px 30px;            
             }        
         }
+
+        .zone_delivery{
+            height: 40%;
+            padding: 20px 0px;
+           & > div{
+               background-color: #FFFFFF;
+               border-radius: 27px;
+               height: 100%;
+               padding: 27px 30px;  
+               .zone_delivery_list{
+                height: calc( 30vh - 100px );
+                overflow-y: auto;
+            }          
+           }        
+       }
 
  
 
@@ -196,13 +195,26 @@
      }
  }
 
-
+ 
 
 .agenda{
     width: 43px;
     height: 43px;
     border-radius: 50%;  
     background-color: #58C6FA;
+    font-size: 13px;
+    p{
+        text-align: center;
+        color: #FFFFFF;
+        padding-top: 25%;
+    }
+}
+
+.agenda-free{
+    width: 43px;
+    height: 43px;
+    border-radius: 50%;  
+    background-color: #A8A7A7;
     font-size: 13px;
     p{
         text-align: center;
@@ -241,6 +253,8 @@
 
 .badge_geographic_name{
 
+    width: 170px;
+    height: 38px;
     background: #58C6FA;
     border-radius: 25px;
     p{
@@ -259,4 +273,19 @@
         color: #5A5A5A;
         padding-top: 15%;
     }
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+ ::-webkit-scrollbar-track {
+    background-color: #DEDEDE;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+}
+
+ ::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: var(--primary_color); 
 }

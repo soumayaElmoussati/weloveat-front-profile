@@ -19,8 +19,8 @@ export class AdditionalErrandsComponent implements OnInit {
   currentPage: number = 1;
   additionalErrandsDataSource = new MatTableDataSource(<any>[]);
   displayedColumns: string[] = ['select', 'name', 'address_establishment', 'address_shipping', 'commission', 'statut','update','delete', 'confirmed','action'];
-  pagination = [];
   perPage: number = 10;
+  lastPage = 0;
   search = new FormControl('');
   order = new FormControl('ALPHABETICAL');
   NOT_TREATED = new FormControl(true);
@@ -79,9 +79,9 @@ export class AdditionalErrandsComponent implements OnInit {
     this.additionalErrandS.getAllAdditionalErrands(data, this.currentPage ).subscribe(
       data => {
         this.additionalErrandsList = data;
+        this.lastPage = data.last_page;
         console.log(data);
         this.refrechDataSource();
-        this.generatePagination();
       }
     )
   }
@@ -90,22 +90,6 @@ export class AdditionalErrandsComponent implements OnInit {
     this.additionalErrandsDataSource = new MatTableDataSource(this.additionalErrandsList.data);  
   }
 
-
-  generatePagination(){
-    this.pagination = [];
-    for( let i = 1 ; i <= this.additionalErrandsList.last_page ; i++  ){
-      this.pagination.push(i);
-    }
-  }
-
-  nextPage(): number{
-    if(this.currentPage < this.additionalErrandsList.last_page) return +this.currentPage + 1;
-    else return this.currentPage;
-  }
-  prevPage(): number{
-    if(this.currentPage > 1 ) return +this.currentPage - 1;
-    else return this.currentPage;
-  }
 
   confirmErrand(el, index){
     const dialog = this.dialog.open( ConfirmationDeliveryComponent , {
@@ -131,6 +115,48 @@ export class AdditionalErrandsComponent implements OnInit {
       }
     })
   }
+  //
+
+  navigateTo(page) {
+    this.currentPage = page;
+    this.getAdditionalErrands();
+  }
+
+ //
+  getCollection(index): any {
+    let array = [];    
+    const pagesBefore = this.currentPage - 1;
+    const pagesAfter = index - this.currentPage;
+    if(index <= 4){
+      for (let i = 1; i <= index; i++) {
+        array.push(i);
+      }
+      return array;
+    }
+    if (pagesBefore < 2) {
+      if(this.currentPage != 1) array.push(1);
+      array.push(this.currentPage);
+      array.push(this.currentPage + 1);
+      array.push(this.currentPage + 2);
+      array.push(index);
+    } else if (pagesAfter < 2) {
+      array.push(1);
+      array.push(this.currentPage - 2);
+      array.push(this.currentPage - 1);
+      array.push(this.currentPage);
+      if(this.currentPage != index) array.push(index);
+    } else {
+      array.push(1);
+      array.push(this.currentPage - 1);
+      array.push(this.currentPage);
+      array.push(this.currentPage + 1);
+      array.push(index);
+    }
+    if((array[1] - 1) > 1) array.splice(1, 0, '...');
+    if((index - array[array.length - 2]) > 1) array.splice(array.length-1, 0, '...');
+    return array;
+  }
+
 
 
 }

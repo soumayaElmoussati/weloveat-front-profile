@@ -43,6 +43,16 @@ export class EstablishmentAdminComponent implements OnInit {
     evening_end_time: new FormControl('')
   });
 
+
+  livraisonOuvertureForm = new FormGroup({
+    id: new FormControl(''),
+    day: new FormControl(''),
+    morning_end_time: new FormControl(''),
+    morning_start_time: new FormControl(''),
+    evening_start_time: new FormControl(''),
+    evening_end_time: new FormControl('')
+  });
+
   yourEstablishmentForm = new FormGroup({
     id: new FormControl(''),
     name: new FormControl('')

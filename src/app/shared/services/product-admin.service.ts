@@ -62,4 +62,8 @@ export class ProductAdminService {
     return this.http.post(this.apiUrl + 'productAdditionalCategories', data );
   }
 
+  updateProductAdditionalCategories(data){
+    return this.http.put(this.apiUrl + 'productAdditionalCategories/'+data.id, data);
+  }
+
 }

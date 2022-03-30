@@ -14,6 +14,7 @@ import { TranslocoService } from '@ngneat/transloco';
 export class FacturesComponent implements OnInit {
 
   currentPage: number = 1;
+  lastPage = 0;
   invoicesList: any;
   invoicesDataSource = new MatTableDataSource(<any>[]);
   displayedColumns: string[] = ['select', 'date', 'invoice', 'amount', 'pdf'];
@@ -63,6 +64,7 @@ export class FacturesComponent implements OnInit {
     this.invoicesAdminS.getAllInvoices(data, this.currentPage).subscribe(
       data => {
         this.invoicesList = data;
+        this.lastPage = data.last_page;
         console.log(data);
         this.refrechDataSource();
       }
@@ -124,6 +126,45 @@ export class FacturesComponent implements OnInit {
       }
     )
 
+  }
+
+  getCollection(index): any {
+    let array = [];    
+    const pagesBefore = this.currentPage - 1;
+    const pagesAfter = index - this.currentPage;
+    if(index <= 4){
+      for (let i = 1; i <= index; i++) {
+        array.push(i);
+      }
+      return array;
+    }
+    if (pagesBefore < 2) {
+      if(this.currentPage != 1) array.push(1);
+      array.push(this.currentPage);
+      array.push(this.currentPage + 1);
+      array.push(this.currentPage + 2);
+      array.push(index);
+    } else if (pagesAfter < 2) {
+      array.push(1);
+      array.push(this.currentPage - 2);
+      array.push(this.currentPage - 1);
+      array.push(this.currentPage);
+      if(this.currentPage != index) array.push(index);
+    } else {
+      array.push(1);
+      array.push(this.currentPage - 1);
+      array.push(this.currentPage);
+      array.push(this.currentPage + 1);
+      array.push(index);
+    }
+    if((array[1] - 1) > 1) array.splice(1, 0, '...');
+    if((index - array[array.length - 2]) > 1) array.splice(array.length-1, 0, '...');
+    return array;
+  }
+
+  navigateTo(page) {
+    this.currentPage = page;
+    this.getInvoices();
   }
 
 

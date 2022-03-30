@@ -78,7 +78,7 @@ export class CommandesComponent implements OnInit {
     this.orderAdminS.getAllOrders(data,this.currentPage ).subscribe(
       data => {
         this.ordersList = data;
-      //  this.lastPage = data.last_page;
+        this.lastPage = data.last_page;
        // console.log(data);
         this.refrechDataSource();
 

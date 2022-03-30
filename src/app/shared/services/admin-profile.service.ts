@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpEvent, HttpRequest } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +18,9 @@ export class AdminProfileService {
   currentdataBackTo = this.dataBackTo.asObservable();
   currentLinkParam = new BehaviorSubject<any>([]);
   changeVar = this.currentLinkParam.asObservable();
+
+  coverPicture = new BehaviorSubject(null);
+  newCoverPicture = this.coverPicture.asObservable();
 
   constructor(
     private http: HttpClient
@@ -39,6 +42,20 @@ export class AdminProfileService {
     return this.http.put(this.apiUrl+'companies/'+data.id, data);
   }
 
+  getAdminProfile():any{
+    return this.http.get(this.apiUrl + 'establishments/showAdminProfil');
+  }
 
+
+
+  updateCoverPicture(file: File): Observable<HttpEvent<any>> {
+    const formData: FormData = new FormData();
+    formData.append('picture', file);
+    const req = new HttpRequest('POST', `${this.apiUrl}establishments/editPicture`, formData, {
+      reportProgress: true,
+      responseType: 'json'
+    });
+    return this.http.request(req);
+  }
 
 }

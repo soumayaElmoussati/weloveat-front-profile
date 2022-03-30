@@ -15,6 +15,7 @@ export class ProductAdditionalComponent implements OnInit {
 
   additionalProductsList: any;
   currentPage: number = 1;
+  lastPage = 0;
   additionalProductsDataSource = new MatTableDataSource(<any>[]);
   displayedColumns: string[] = ['display','name', 'options' ,'action'];
   perPage: number = 10;
@@ -52,6 +53,7 @@ export class ProductAdditionalComponent implements OnInit {
     this.productAdminS.getAdditionalCategories(data,this.currentPage).subscribe(
       data => {
         this.additionalProductsList = data;
+        this.lastPage = data.last_page;
         this.refrechDataSource();
         console.log(data);
       }
@@ -87,6 +89,18 @@ export class ProductAdditionalComponent implements OnInit {
   }
   //
 
+  editAdditionalProduct(el, index) {
+    const dialog = this.dialog.open(AddNewProductAdditionalComponent, {
+       data:el
+    });
+
+     dialog.afterClosed().subscribe(data => {
+       
+    })  
+
+  }
+  //
+
   addProductAdditional(){
     const dialog = this.dialog.open(AddNewProductAdditionalComponent, {
       
@@ -96,6 +110,49 @@ export class ProductAdditionalComponent implements OnInit {
      
     })  
   }
+
+  //
+
+  getCollection(index): any {
+    let array = [];    
+    const pagesBefore = this.currentPage - 1;
+    const pagesAfter = index - this.currentPage;
+    if(index <= 4){
+      for (let i = 1; i <= index; i++) {
+        array.push(i);
+      }
+      return array;
+    }
+    if (pagesBefore < 2) {
+      if(this.currentPage != 1) array.push(1);
+      array.push(this.currentPage);
+      array.push(this.currentPage + 1);
+      array.push(this.currentPage + 2);
+      array.push(index);
+    } else if (pagesAfter < 2) {
+      array.push(1);
+      array.push(this.currentPage - 2);
+      array.push(this.currentPage - 1);
+      array.push(this.currentPage);
+      if(this.currentPage != index) array.push(index);
+    } else {
+      array.push(1);
+      array.push(this.currentPage - 1);
+      array.push(this.currentPage);
+      array.push(this.currentPage + 1);
+      array.push(index);
+    }
+    if((array[1] - 1) > 1) array.splice(1, 0, '...');
+    if((index - array[array.length - 2]) > 1) array.splice(array.length-1, 0, '...');
+    return array;
+  }
+
+  //
+
+  navigateTo(page){
+    this.currentPage = page;
+    this.getAdditionalCategories();
+}
   
 
 }
