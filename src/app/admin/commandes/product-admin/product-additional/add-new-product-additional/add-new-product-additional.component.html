@@ -18,7 +18,7 @@
             <div class="col-sm-12">
               <mat-label class="pl-3 mb-1 d-block">Nom de l'annexe</mat-label>
               <mat-form-field appearance="outline" class="mb-3">
-                <input matInput formControlName="name" name="name" placeholder="Nom">
+                <input matInput formControlName="name"  placeholder="Nom">
               </mat-form-field>
             </div>
           </div>
@@ -37,12 +37,12 @@
               <ng-container [formGroupName]="i">
             <div class="col-8">
               <mat-form-field appearance="outline" class="mb-3">
-                  <input matInput formControlName="name" name="name" placeholder="Option">
+                  <input matInput formControlName="name"  placeholder="Option">
                 </mat-form-field>
             </div>
             <div class="col-4">
               <mat-form-field appearance="outline" class="mb-3">
-                  <input matInput formControlName="price" name="price" placeholder="Price">
+                  <input matInput formControlName="price"  placeholder="Price">
                 </mat-form-field>
             </div>
           </ng-container>
@@ -64,7 +64,7 @@
          </div> 
   
       </form>
-      {{this.categoryAdditionalForm.value | json}}
+      
     </div>
   
   </div>

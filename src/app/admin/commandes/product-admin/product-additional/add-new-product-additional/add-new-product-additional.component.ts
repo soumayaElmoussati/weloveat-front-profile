@@ -28,16 +28,18 @@ export class AddNewProductAdditionalComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.addProduct();
 
     if(this.data){
       this.categoryAdditionalForm.get('id').setValue(this.data.id);
       this.categoryAdditionalForm.get('name').setValue(this.data.name);
       this.categoryAdditionalForm.get('multi_select').setValue(this.data.multi_select);
-  //    this.categoryAdditionalForm.get('products').setValue(this.data.products);
+   //  this.categoryAdditionalForm.get('products').setValue(this.data.products);
       this.categoryAdditionalForm.get('products').setValue([
-        { name: this.data.name },
-        { price: this.data.price}	
+        { name: this.data.products.name,  price: 12}
+     
       ]);
+      console.log('Value',this.data.products.name)
     }
   }
 
